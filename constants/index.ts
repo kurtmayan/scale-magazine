@@ -1,1 +1,1 @@
-export { navLink } from "./Navigation";
+export { headerNavLink } from "./Navigation";

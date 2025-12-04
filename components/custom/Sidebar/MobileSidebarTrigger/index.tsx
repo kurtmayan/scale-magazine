@@ -8,7 +8,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { navLink } from "@/constants";
+import { headerNavLink } from "@/constants";
 import { Menu } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -35,7 +35,7 @@ export function MobileSidebar() {
           </SheetTitle>
           <SheetDescription />
           <div className="grid gap-5">
-            {navLink.map((nav) => (
+            {headerNavLink.map((nav) => (
               <SheetClose
                 asChild
                 key={nav.label}

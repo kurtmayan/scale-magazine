@@ -3,7 +3,7 @@ export type NavLinkType = {
   label: string;
 };
 
-export const navLink: NavLinkType[] = [
+export const headerNavLink: NavLinkType[] = [
   {
     url: "/",
     label: "home",
@@ -27,5 +27,28 @@ export const navLink: NavLinkType[] = [
   {
     url: "/more",
     label: "more",
+  },
+];
+
+export const footerNavLink: NavLinkType[] = [
+  {
+    url: "/contact-us",
+    label: "contact us",
+  },
+  {
+    url: "/privacy-policy",
+    label: "privacy policy",
+  },
+  {
+    url: "/terms-and-condition",
+    label: "terms and condition",
+  },
+  {
+    url: "/advertise",
+    label: "advertise",
+  },
+  {
+    url: "/security",
+    label: "security",
   },
 ];
