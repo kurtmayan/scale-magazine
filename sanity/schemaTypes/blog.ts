@@ -11,18 +11,6 @@ export default defineType({
       type: "string",
     }),
     defineField({
-      name: "type",
-      title: "Type",
-      type: "string",
-      options: {
-        list: [
-          { title: "Highlights", value: "highlights" },
-          { title: "Featured Posts", value: "featuredPosts" },
-        ],
-        layout: "dropdown",
-      },
-    }),
-    defineField({
       name: "category",
       title: "Category",
       type: "array",
@@ -32,6 +20,15 @@ export default defineType({
           to: [{ type: "category" }],
         },
       ],
+    }),
+    defineField({
+      name: "type",
+      title: "Type",
+      type: "string",
+      options: {
+        list: [{ title: "highlight", value: "highlight" }],
+        layout: "dropdown",
+      },
     }),
     defineField({
       name: "slug",
@@ -48,6 +45,11 @@ export default defineType({
       name: "featuredImage",
       title: "Featured Image",
       type: "image",
+    }),
+    defineField({
+      name: "shortDescription",
+      title: "Short Description",
+      type: "text",
     }),
     defineField({
       name: "body",
