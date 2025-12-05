@@ -22,6 +22,12 @@ export default defineType({
       ],
     }),
     defineField({
+      name: "tag",
+      title: "Tag",
+      type: "string",
+      placeholder: "Business, Technology, Health, etc.",
+    }),
+    defineField({
       name: "type",
       title: "Type",
       type: "string",
