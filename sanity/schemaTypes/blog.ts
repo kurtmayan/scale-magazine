@@ -63,13 +63,8 @@ export default defineType({
     defineField({
       name: "author",
       title: "Author",
-      type: "array",
-      of: [
-        {
-          type: "reference",
-          to: [{ type: "author" }],
-        },
-      ],
+      type: "reference",
+      to: [{ type: "author" }],
     }),
   ],
 });
