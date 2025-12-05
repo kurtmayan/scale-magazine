@@ -1,16 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Alumni_Sans, Inter } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "next-themes";
-import { FooterNav, HeaderNav } from "@/components/custom/NavigationBar";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const alumniSans = Alumni_Sans({
+  variable: "--font-alumni-sans",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
@@ -26,9 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${alumniSans.variable} ${inter.variable} antialiased`}>
         {children}
       </body>
     </html>

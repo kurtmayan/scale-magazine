@@ -2,6 +2,9 @@
 @import "tw-animate-css";
 
 @theme inline {
+  --font-alumni-sans: "Alumni Sans";
+  --font-inter: "Inter";
+  --font-times-new-roman: "Times New Roman", Times, serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
