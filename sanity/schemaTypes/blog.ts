@@ -54,7 +54,8 @@ export default defineType({
     defineField({
       name: "body",
       title: "Body",
-      type: "text",
+      type: "array",
+      of: [{ type: "block" }],
     }),
     defineField({
       name: "author",
