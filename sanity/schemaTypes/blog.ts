@@ -45,12 +45,6 @@ export default defineType({
       },
     }),
     defineField({
-      title: "Date Published",
-      name: "datPublished",
-      type: "datetime",
-      options: {},
-    }),
-    defineField({
       name: "featuredImage",
       title: "Featured Image",
       type: "image",
