@@ -5,6 +5,10 @@ export type BaseBlogType = {
   shortDescription: string;
   featuredImage: SanityImageType;
   slug: SanitySlugType;
+  category: {
+    tag: string;
+  };
+  _createdAt: string;
 };
 
 export type FullBlogType = BaseBlogType & {};
