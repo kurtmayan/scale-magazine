@@ -24,7 +24,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${alumniSans.variable} ${inter.variable} antialiased`}>
+      <body
+        className={`${alumniSans.variable} ${inter.variable} antialiased bg-platinum`}
+      >
         {children}
       </body>
     </html>

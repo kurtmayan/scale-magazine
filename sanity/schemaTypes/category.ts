@@ -6,8 +6,8 @@ export default defineType({
   type: "document",
   fields: [
     defineField({
-      name: "addtags",
-      title: "Add Tags",
+      name: "tag",
+      title: "Tag",
       type: "string",
       validation: (text) => text.lowercase(),
     }),
