@@ -1,5 +1,4 @@
 "use client";
-
 import {
   AccordionContent,
   AccordionItem,
@@ -57,17 +56,14 @@ export function MobileSidebar(props: { categories: Array<Category> }) {
                         {nav.label}
                       </AccordionTrigger>
                       <AccordionContent className="flex flex-col">
-                        {props.categories.map((e, index) => {
-                          console.log(e);
-                          return (
-                            <SheetClose
-                              key={index}
-                              className={`${"/category/" + e.tag == pathname ? "bg-black text-white" : "bg-transparent text-black"} py-2 px-6 uppercase font-semibold text-2xl font-alumni-sans text-left`}
-                            >
-                              <Link href={"/category/" + e.tag}>{e.tag}</Link>
-                            </SheetClose>
-                          );
-                        })}
+                        {props.categories.map((e, index) => (
+                          <SheetClose
+                            key={index}
+                            className={`${"/blog/" + e.tag == pathname ? "bg-black text-white" : "bg-transparent text-black"} py-2 px-6 uppercase font-semibold text-2xl font-alumni-sans text-left`}
+                          >
+                            <Link href={"/blog/" + e.tag}>{e.tag}</Link>
+                          </SheetClose>
+                        ))}
                       </AccordionContent>
                     </AccordionItem>
                   </Accordion>

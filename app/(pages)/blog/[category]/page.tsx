@@ -5,65 +5,44 @@ import {
   PaginationLink,
 } from "@/components/ui/pagination";
 import { capitalizeFirstLetters } from "@/lib/utils";
+import { GET_BLOG_BY_CATEGORY } from "@/sanity/lib/queries";
+import { client } from "@/sanity/lib/client";
 import { MoveLeft, MoveRight } from "lucide-react";
-import Image from "next/image";
+import { Blog } from "@/sanity.types";
+import Highlight from "@/components/custom/Blog/Highlight";
+import Item from "@/components/custom/Blog/Item";
 
 export default async function Page({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ category: string }>;
 }) {
-  const { slug } = await params;
+  const { category } = await params;
+  const blogCategories = await client.fetch<Blog[]>(GET_BLOG_BY_CATEGORY, {
+    // @ts-expect-error ts-migrate-ignore
+    tag: category,
+  });
+  const highlightPost = blogCategories.find(
+    (post) => post.type === "highlight",
+  );
+
+  const normalPosts = blogCategories.filter(
+    (post) => post.type !== "highlight",
+  );
   return (
     <div className=" lg:w-10/12 mx-auto">
       <div className="max-sm:ps-5 max-sm:pt-5 lg:pt-16">
         <div className="h-2.5 w-20 bg-[#5C5C5C] rounded-full"></div>
         <h1 className="font-times-new-roman max-sm:text-[28px] lg:text-[64px]">
-          {capitalizeFirstLetters(slug)}
+          {capitalizeFirstLetters(category)}
         </h1>
       </div>
 
-      <div>
-        <div className="relative aspect-video">
-          <Image
-            src="https://cdn.sanity.io/images/2n1nozhz/staging/34d4e51fe4ad439d012fb7d86dd896d4ad2caec1-1920x1080.png"
-            alt="Hello"
-            fill
-            priority
-            className="object-contain px-1"
-          />
-        </div>
-        <div className="p-5">
-          <h2 className="font-times-new-roman max-sm:text-2xl lg:text-[48px]">
-            The Insider&apos;s your Guide to Real Estate Success
-          </h2>
-          <p className="font-inter max-sm:text-xs leading-[165%] lg:text-[28px]">
-            Gain expert insights, proven strategies, and the latest market
-            trends to navigate the real estate world with confidence. Make
-            informed decisions and maximize your investment potential for
-            long-term profitability.
-          </p>
-        </div>
-      </div>
+      {highlightPost && <Highlight {...highlightPost} />}
 
       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 px-5 justify-items-center justify-around">
-        {Array.from({ length: 10 }).map((e, index) => (
-          <div key={index}>
-            <div className="relative aspect-square max-sm:h-[150px] max-sm:w-[178px] lg:w-[474px] lg:h-[398px]">
-              <Image
-                src={
-                  "https://cdn.sanity.io/images/2n1nozhz/staging/c15ecf93caec8f55507fdd15347e0d5f24095046-800x450.png?w=2000&fit=max&auto=format"
-                }
-                alt="Hello"
-                fill
-                priority
-                className="object-cover px-1"
-              />
-            </div>
-            <p className="font-times-new-roman max-sm:text-sm text-wrap max-sm:w-[178px] lg:w-[474px] lg:text-[32px] leading-[118.9%] px-1 mt-2">
-              From Market Trends to Investment Tips
-            </p>
-          </div>
+        {normalPosts.map((e, index) => (
+          <Item key={index} {...e} />
         ))}
       </div>
 

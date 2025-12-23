@@ -7,7 +7,8 @@ import { client } from "@/sanity/lib/client";
 import { GET_CATEGORIES } from "@/sanity/lib/queries";
 
 export async function HeaderNav() {
-  const categories = await await await await await client.fetch(GET_CATEGORIES);
+  const categories = await client.fetch(GET_CATEGORIES);
+
   return (
     <div className="bg-background w-full flex sm:justify-center justify-between gap-5 p-5 sm:items-end items-center  border-b-2 border-gray-300 shadow-sm sticky top-0">
       <div>
