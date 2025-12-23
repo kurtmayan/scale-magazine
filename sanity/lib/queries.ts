@@ -18,3 +18,20 @@ export const GET_BLOG_BY_CATEGORY = defineQuery(`*[
   }
 }
 `);
+
+export const GET_BLOG_BY_SLUG =
+  defineQuery(`*[_type == "blog" && slug.current == $slug][0]{
+  title,
+  slug,
+  shortDescription,
+  body,
+  featuredImage,
+  _createdAt,
+  author-> { 
+    firstName, 
+    middleName, 
+    lastName, 
+    avatar 
+  },
+  category[]-> { title }
+}`);
