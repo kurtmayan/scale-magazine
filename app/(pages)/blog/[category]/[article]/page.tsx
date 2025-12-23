@@ -125,14 +125,11 @@ export default async function Article({
           More from {capitalizeFirstLetters(category)}
         </TimesNewRoman>
 
-        <div className="gap-2 flex flex-col ">
+        <div className="gap-2 flex flex-col mt-2">
           {blogCategories.map((e, index) => (
-            <div className="flex" key={index}>
+            <div className="flex gap-2" key={index}>
               <div className="relative aspect-square max-sm:h-37.5 max-sm:w-44.5 lg:w-118.5 lg:h-99.5">
                 <Image
-                  // src={
-                  //   "https://cdn.sanity.io/images/2n1nozhz/production/e5c3bd7ec07e195699d8940e2b8429c258669532-388x187.png?w=2000&fit=max&auto=format&dpr=2"
-                  // }
                   src={urlFor(e.featuredImage || "").url()}
                   alt="Hello"
                   fill
@@ -142,12 +139,10 @@ export default async function Article({
               </div>
               <div className="flex justify-center flex-col">
                 <TimesNewRoman className="text-base leading-[118.9%]">
-                  From Market Trens to Investment Tips
+                  {e.title}
                 </TimesNewRoman>
                 <Inter className="text-xs text-[#1E1E1E] font-extralight leading-[130%] mt-1">
-                  Stay ahead in the real estate market with the latest trends,
-                  expert insights, and smart investment tips. Learn how to make
-                  informed decisions.
+                  {e.shortDescription}
                 </Inter>
               </div>
             </div>
