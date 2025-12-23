@@ -27,9 +27,9 @@ export default async function Article({
     // @ts-expect-error ts-migrate-ignore
     tag: category,
   });
-  const normalPosts = blogCategories.filter(
-    (post) => post.type !== "highlight",
-  );
+  const normalPosts = blogCategories
+    .filter((post) => post.type !== "highlight")
+    .slice(0, 3);
 
   return (
     <div className="lg:w-10/12 mx-auto ">
@@ -114,9 +114,15 @@ export default async function Article({
         </button>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 px-5 justify-items-center justify-around">
+      <div className="px-5 justify-items-center justify-around flex flex-row">
         {normalPosts.map((e, index) => (
-          <Item key={index} slugCategory={category} {...e} />
+          <Item
+            key={index}
+            width={120}
+            height={112}
+            slugCategory={category}
+            {...e}
+          />
         ))}
       </div>
 
