@@ -33,8 +33,8 @@ export default async function Article({
 
   return (
     <div className="lg:w-10/12 mx-auto ">
-      <div className="max-sm:ps-5 max-sm:pt-5 lg:pt-16">
-        <AlumniSans className="font-semibold text-[26px]">
+      <div className="max-sm:ps-5 max-sm:pt-5 lg:pt-16 p-5">
+        <AlumniSans className="font-semibold  max-sm:text-[26px] lg:text-[64px]">
           INDUSTRY / REAL ESTATE
         </AlumniSans>
       </div>
@@ -49,81 +49,86 @@ export default async function Article({
             className="object-contain px-1"
           />
         </div>
-        <div className="p-4">
+        <div className="px-4">
           <TimesNewRoman className="max-sm:text-2xl lg:text-[48px]">
             {blogSlug?.title}
           </TimesNewRoman>
-          <div className="flex items-center justify-between mt-2">
-            <div className="flex items-center justify-center">
-              <Avatar className="rounded-full w-5 h-5 items-center justify-center">
-                <AvatarImage
-                  src={urlFor(blogSlug?.author?.avatar ?? "").url()}
-                  alt="@evilrabbit"
-                  className="w-5 h-5 rounded-full"
-                />
-                <AvatarFallback>ER</AvatarFallback>
-              </Avatar>
+        </div>
+        <div className="px-4 grid md:grid-cols-[2fr_1fr]">
+          <div>
+            <div className="flex items-center justify-between mt-2">
+              <div className="flex items-center justify-center pb-4">
+                <Avatar className="rounded-full w-5 h-5 items-center justify-center">
+                  <AvatarImage
+                    src={urlFor(blogSlug?.author?.avatar ?? "").url()}
+                    alt="@evilrabbit"
+                    className="w-5 h-5 rounded-full"
+                  />
+                  <AvatarFallback>ER</AvatarFallback>
+                </Avatar>
+                <AlumniSans className="text-[#5C5C5C] text-sm">
+                  BY: {blogSlug?.author?.firstName} {blogSlug?.author?.lastName}
+                </AlumniSans>
+              </div>
+
               <AlumniSans className="text-[#5C5C5C] text-sm">
-                BY: {blogSlug?.author?.firstName} {blogSlug?.author?.lastName}
+                {new Date(blogSlug?._createdAt ?? "")
+                  .toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })
+                  .toUpperCase()}
               </AlumniSans>
+              <div></div>
+            </div>
+            <PortableText
+              value={blogSlug?.body ?? []}
+              components={{
+                block: {
+                  h1: ({ children }) => (
+                    <Inter className="text-2xl leading-[165%]">
+                      {children}
+                    </Inter>
+                  ),
+                  h2: ({ children }) => (
+                    <Inter className="text-3xl leading-[165%]">
+                      {children}
+                    </Inter>
+                  ),
+                  h3: ({ children }) => (
+                    <Inter className="text-4xl leading-[165%]">
+                      {children}
+                    </Inter>
+                  ),
+                  h4: ({ children }) => (
+                    <Inter className="text-5xl leading-[165%]">
+                      {children}
+                    </Inter>
+                  ),
+                  normal: ({ children }) => (
+                    <Inter className="text-xs leading-[165%]">{children}</Inter>
+                  ),
+                },
+              }}
+            />
+          </div>
+          <div>
+            <div className="my-8">
+              <button className="border border-[#1E1E1E] px-4 py-2">
+                <AlumniSans className="font-medium text-xs ">
+                  RECENT STORIES
+                </AlumniSans>
+              </button>
             </div>
 
-            <AlumniSans className="text-[#5C5C5C] text-sm">
-              {new Date(blogSlug?._createdAt ?? "")
-                .toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })
-                .toUpperCase()}
-            </AlumniSans>
-            <div></div>
+            <div className=" justify-between flex sm:block ">
+              {normalPosts.map((e, index) => (
+                <Item key={index} slugCategory={category} {...e} />
+              ))}
+            </div>
           </div>
         </div>
-        <div className="px-4">
-          <PortableText
-            value={blogSlug?.body ?? []}
-            components={{
-              block: {
-                h1: ({ children }) => (
-                  <Inter className="text-2xl leading-[165%]">{children}</Inter>
-                ),
-                h2: ({ children }) => (
-                  <Inter className="text-3xl leading-[165%]">{children}</Inter>
-                ),
-                h3: ({ children }) => (
-                  <Inter className="text-4xl leading-[165%]">{children}</Inter>
-                ),
-                h4: ({ children }) => (
-                  <Inter className="text-5xl leading-[165%]">{children}</Inter>
-                ),
-                normal: ({ children }) => (
-                  <Inter className="text-xs leading-[165%]">{children}</Inter>
-                ),
-              },
-            }}
-          />
-        </div>
-      </div>
-
-      <div className="px-4 my-8">
-        <button className="border border-[#1E1E1E] px-4 py-2">
-          <AlumniSans className="font-medium text-xs">
-            RECENT STORIES
-          </AlumniSans>
-        </button>
-      </div>
-
-      <div className="px-5 justify-items-center justify-around flex flex-row">
-        {normalPosts.map((e, index) => (
-          <Item
-            key={index}
-            width={120}
-            height={112}
-            slugCategory={category}
-            {...e}
-          />
-        ))}
       </div>
 
       <div className="p-4">

@@ -13,6 +13,7 @@ export const GET_BLOG_BY_CATEGORY = defineQuery(`*[
   type,
   shortDescription,
   featuredImage,
+  _createdAt,
   category[]->{
     tag
   }
