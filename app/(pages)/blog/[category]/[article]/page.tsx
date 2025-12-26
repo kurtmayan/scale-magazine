@@ -92,6 +92,19 @@ export default async function Article({
             <PortableText
               value={blogSlug?.body ?? []}
               components={{
+                types: {
+                  image: ({ value, index }) => (
+                    <div className="relative aspect-video -z-10">
+                      <Image
+                        src={urlFor(value ?? "").url()}
+                        alt={index + " images"}
+                        fill
+                        priority
+                        className="object-contain px-1"
+                      />
+                    </div>
+                  ),
+                },
                 block: {
                   h1: ({ children }) => (
                     <Inter className="max-sm:text-3xl sm:text-4xl leading-[165%] font-bold">
