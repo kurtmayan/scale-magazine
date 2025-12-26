@@ -71,11 +71,11 @@ export function MobileSidebar(props: { categories: Array<Category> }) {
                           <SheetClose
                             key={index}
                             className={`
-                              py-2 px-6 uppercase font-semibold text-2xl font-alumni-sans text-left bg-[#1E1E1E]
+                              py-2 px-6 uppercase font-semibold text-2xl font-alumni-sans text-left 
                               ${
                                 isIndustriesRoute
                                   ? pathname === "/blog/" + e.tag
-                                    ? " text-white"
+                                    ? "bg-[#1E1E1E] text-white"
                                     : "text-neutral-300 hover:bg-[#1E1E1E] hover:text-white "
                                   : "text-black"
                               }
