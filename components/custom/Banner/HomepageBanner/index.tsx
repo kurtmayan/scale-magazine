@@ -26,7 +26,7 @@ export default async function HomepageBanner() {
   const otherFeaturedBlog = blog.slice(1);
 
   return (
-    <div className="grid gap-5">
+    <div className="grid gap-5 w-full xl:w-[1440px] xl:mx-auto">
       <Image
         src={urlFor(primaryFeaturedBlog.featuredImage).url()}
         width={100}
@@ -34,32 +34,35 @@ export default async function HomepageBanner() {
         alt="Primary Featured Image"
         className="w-full"
       />
-      <div className="grid md:grid-cols-2 px-5 gap-5">
-        <div className="grid gap-1">
-          <AlumniSans className="text-lg uppercase">
+      <div className="grid lg:grid-cols-2 xl:px-0 px-5 gap-5">
+        <div className="xl:flex xl:flex-col xl:gap-3 grid gap-1">
+          <AlumniSans className="text-lg uppercase xl:text-2xl">
             {primaryFeaturedBlog.category.tag}
           </AlumniSans>
-          <TimesNewRoman className="text-2xl leading-8">
+          <TimesNewRoman className="text-2xl leading-8  xl:text-3xl">
             {primaryFeaturedBlog.title}
           </TimesNewRoman>
-          <Inter className="text-xs font-light">
+          <Inter className="text-xs font-light  xl:text-xl">
             {primaryFeaturedBlog.shortDescription}
           </Inter>
         </div>
-        <div className="grid md:grid-cols-2">
+
+        <div className="grid lg:grid-cols-2 lg:gap-16 py-5">
           {otherFeaturedBlog.map(({ title, slug, category, featuredImage }) => (
-            <div className="grid gap-2" key={title}>
+            <div className="xl:flex xl:flex-col gap-1 grid" key={title}>
               <Image
                 src={urlFor(featuredImage).url()}
                 width={100}
                 height={100}
                 alt={title}
-                className="w-full"
+                className="w-full xl:w-[307px] xl:h-[187px]"
               />
               <AlumniSans className="uppercase text-lg">
                 {category.tag}
               </AlumniSans>
-              <TimesNewRoman className="text-xl ">{title}</TimesNewRoman>
+              <TimesNewRoman className="text-xl xl:text-3xl">
+                {title}
+              </TimesNewRoman>
             </div>
           ))}
         </div>

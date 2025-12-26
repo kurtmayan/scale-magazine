@@ -57,7 +57,10 @@ export default async function Home() {
                 slug,
                 _createdAt,
               }) => (
-                <CarouselItem className="pl-1 basis-1/2 " key={slug.current}>
+                <CarouselItem
+                  className="pl-1 basis-1/2 md:basis-1/3 lg:basis-1/4"
+                  key={slug.current}
+                >
                   <Link href="#">
                     <div className="p-1 grid gap-1">
                       <Image
@@ -65,7 +68,7 @@ export default async function Home() {
                         width={100}
                         height={100}
                         alt={title}
-                        className="w-[232px] h-[232px]  z-10"
+                        className="w-[177px] h-[232px] lg:w-full"
                       />
                       <AlumniSans className="text-xs font-medium">
                         {formatDate(_createdAt)}
