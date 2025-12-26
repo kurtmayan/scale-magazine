@@ -12,6 +12,7 @@ import { Blog } from "@/sanity.types";
 import { urlFor } from "@/sanity/lib/image";
 import { PortableText } from "@portabletext/react";
 import { capitalizeFirstLetters } from "@/lib/utils";
+import ListItem from "@/components/custom/Blog/ListItem";
 
 export default async function Article({
   params,
@@ -116,9 +117,9 @@ export default async function Article({
             />
           </div>
           <div>
-            <div className="my-8">
-              <button className="border border-[#1E1E1E] px-4 py-2 cursor-pointer">
-                <AlumniSans className="font-medium text-xs ">
+            <div className="mt-2 mb-4">
+              <button className="border border-[#1E1E1E] max-sm:w-[97px] max-sm:h-[36px] sm:h-[73.15px] sm:w-[205px] cursor-pointer items-center justify-center flex">
+                <AlumniSans className="font-medium max-sm:text-xs sm:text-[32px]">
                   RECENT STORIES
                 </AlumniSans>
               </button>
@@ -134,31 +135,13 @@ export default async function Article({
       </div>
 
       <div className="p-4">
-        <TimesNewRoman className="text-2xl">
+        <TimesNewRoman className="max-sm:text-2xl sm:text-[64px]">
           More from {capitalizeFirstLetters(category)}
         </TimesNewRoman>
 
         <div className="gap-2 flex flex-col mt-2 ">
           {blogCategories.map((e, index) => (
-            <div className="flex gap-2" key={index}>
-              <div className="relative aspect-square max-sm:h-37.5 max-sm:w-44.5 lg:w-118.5 lg:h-99.5 -z-10">
-                <Image
-                  src={urlFor(e.featuredImage || "").url()}
-                  alt="Hello"
-                  fill
-                  priority
-                  className="object-cover px-1"
-                />
-              </div>
-              <div className="flex justify-center flex-col">
-                <TimesNewRoman className="text-base leading-[118.9%]">
-                  {e.title}
-                </TimesNewRoman>
-                <Inter className="text-xs text-[#1E1E1E] font-extralight leading-[130%] mt-1">
-                  {e.shortDescription}
-                </Inter>
-              </div>
-            </div>
+            <ListItem {...e} key={index} />
           ))}
         </div>
       </div>
