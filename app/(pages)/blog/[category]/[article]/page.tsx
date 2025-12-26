@@ -35,12 +35,12 @@ export default async function Article({
     <div className="lg:w-10/12 mx-auto ">
       <div className="max-sm:ps-5 max-sm:pt-5 lg:pt-16 p-5">
         <AlumniSans className="font-semibold  max-sm:text-[26px] lg:text-[64px]">
-          INDUSTRY / REAL ESTATE
+          {category.toUpperCase()}
         </AlumniSans>
       </div>
 
       <div>
-        <div className="relative aspect-video">
+        <div className="relative aspect-video -z-10">
           <Image
             src={urlFor(blogSlug?.featuredImage ?? "").url()}
             alt="Hello"
@@ -50,28 +50,28 @@ export default async function Article({
           />
         </div>
         <div className="px-4">
-          <TimesNewRoman className="max-sm:text-2xl lg:text-[48px]">
+          <TimesNewRoman className="max-sm:text-2xl sm:text-[60px]">
             {blogSlug?.title}
           </TimesNewRoman>
         </div>
         <div className="px-4 grid md:grid-cols-[2fr_1fr]">
           <div>
-            <div className="flex items-center justify-between mt-2">
-              <div className="flex items-center justify-center pb-4">
-                <Avatar className="rounded-full w-5 h-5 items-center justify-center">
+            <div className="flex items-center justify-between mt-2 mb-4">
+              <div className="flex items-center justify-center  gap-2">
+                <Avatar className="rounded-full max-sm:w-5 max-sm:h-5 sm:w-[60px] sm:h-[60px] items-center justify-center -z-10">
                   <AvatarImage
                     src={urlFor(blogSlug?.author?.avatar ?? "").url()}
                     alt="@evilrabbit"
-                    className="w-5 h-5 rounded-full"
+                    className="max-sm:w-5 max-sm:h-5 sm:w-[60px] sm:h-[60px] rounded-full "
                   />
                   <AvatarFallback>ER</AvatarFallback>
                 </Avatar>
-                <AlumniSans className="text-[#5C5C5C] text-sm">
+                <AlumniSans className="text-[#5C5C5C] max-sm:text-sm sm:text-[32px] font-medium">
                   BY: {blogSlug?.author?.firstName} {blogSlug?.author?.lastName}
                 </AlumniSans>
               </div>
 
-              <AlumniSans className="text-[#5C5C5C] text-sm">
+              <AlumniSans className="text-[#5C5C5C] max-sm:text-sm sm:text-[32px] font-medium">
                 {new Date(blogSlug?._createdAt ?? "")
                   .toLocaleDateString("en-US", {
                     year: "numeric",
@@ -87,27 +87,29 @@ export default async function Article({
               components={{
                 block: {
                   h1: ({ children }) => (
-                    <Inter className="text-2xl leading-[165%]">
+                    <Inter className="max-sm:text-3xl sm:text-4xl leading-[165%] font-bold">
                       {children}
                     </Inter>
                   ),
                   h2: ({ children }) => (
-                    <Inter className="text-3xl leading-[165%]">
+                    <Inter className="max-sm:text-2xl sm:text-3xl leading-[165%] font-bold">
                       {children}
                     </Inter>
                   ),
                   h3: ({ children }) => (
-                    <Inter className="text-4xl leading-[165%]">
+                    <Inter className="max-sm:text-xl sm:text-2xl leading-[165%] font-bold">
                       {children}
                     </Inter>
                   ),
                   h4: ({ children }) => (
-                    <Inter className="text-5xl leading-[165%]">
+                    <Inter className="max-sm:text-lg sm:text-xl leading-[165%] font-bold">
                       {children}
                     </Inter>
                   ),
                   normal: ({ children }) => (
-                    <Inter className="text-xs leading-[165%]">{children}</Inter>
+                    <Inter className="max-sm:text-xs sm:text-2xl leading-[165%]">
+                      {children}
+                    </Inter>
                   ),
                 },
               }}
@@ -115,14 +117,14 @@ export default async function Article({
           </div>
           <div>
             <div className="my-8">
-              <button className="border border-[#1E1E1E] px-4 py-2">
+              <button className="border border-[#1E1E1E] px-4 py-2 cursor-pointer">
                 <AlumniSans className="font-medium text-xs ">
                   RECENT STORIES
                 </AlumniSans>
               </button>
             </div>
 
-            <div className=" justify-between flex sm:block ">
+            <div className=" justify-between flex sm:block">
               {normalPosts.map((e, index) => (
                 <Item key={index} slugCategory={category} {...e} />
               ))}
@@ -136,10 +138,10 @@ export default async function Article({
           More from {capitalizeFirstLetters(category)}
         </TimesNewRoman>
 
-        <div className="gap-2 flex flex-col mt-2">
+        <div className="gap-2 flex flex-col mt-2 ">
           {blogCategories.map((e, index) => (
             <div className="flex gap-2" key={index}>
-              <div className="relative aspect-square max-sm:h-37.5 max-sm:w-44.5 lg:w-118.5 lg:h-99.5">
+              <div className="relative aspect-square max-sm:h-37.5 max-sm:w-44.5 lg:w-118.5 lg:h-99.5 -z-10">
                 <Image
                   src={urlFor(e.featuredImage || "").url()}
                   alt="Hello"

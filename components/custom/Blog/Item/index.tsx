@@ -26,7 +26,7 @@ export default function Item({
       href={`/blog/${props.slugCategory}/${props.slug?.current}`}
       className="mb-8 flex max-sm:flex-wrap max-sm:flex-row max-sm:w-[120px] sm:w-full"
     >
-      <div className="relative aspect-square max-sm:h-[112px] max-sm:w-[120px] sm:h-[194px] sm:w-[205px]">
+      <div className="relative aspect-square max-sm:h-[112px] max-sm:w-[120px] sm:h-[194px] sm:w-[205px] -z-10">
         <Image
           src={urlFor(props.featuredImage || "").url()}
           alt={props._id}
@@ -35,7 +35,7 @@ export default function Item({
           className="object-cover px-1"
         />
       </div>
-      <div className=" sm:justify-center sm:flex sm:flex-col gap-5">
+      <div className=" sm:justify-center sm:flex sm:flex-col gap-5 mx-1 mt-1">
         <TimesNewRoman className="text-sm text-wrap leading-[118.9%] truncate line-clamp-2 sm:font-black sm:text-xl">
           {props.title}
         </TimesNewRoman>
