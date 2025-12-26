@@ -35,52 +35,49 @@ export default async function Home() {
                 }`);
 
   const primaryBlog = highlights[0];
-  console.log(primaryBlog.category.tag);
   const remainingBlog = highlights.slice(1);
 
   return (
     <div>
       <HomepageBanner />
       {/* Highlight Section */}
-      <div className="bg-[#e5e5e5] p-5 grid gap-5">
+      <div className="bg-[#e5e5e5] p-5">
         <div className=" grid gap-3">
           <Bar />
           <TimesNewRoman className="text-[28px]">Highlights</TimesNewRoman>
         </div>
-        <div>
-          <Carousel className="w-full">
-            <CarouselContent className="-ml-1">
-              {highlights.map(
-                ({
-                  title,
-                  category,
-                  shortDescription,
-                  featuredImage,
-                  slug,
-                  _createdAt,
-                }) => (
-                  <CarouselItem className="pl-1 basis-1/2" key={slug.current}>
-                    <Link href="#">
-                      <div className="p-1 grid gap-1">
-                        <Image
-                          src={urlFor(featuredImage).url()}
-                          width={100}
-                          height={100}
-                          alt={title}
-                          className="w-auto h-[232px]"
-                        />
-                        <AlumniSans className="text-xs font-medium">
-                          {formatDate(_createdAt)}
-                        </AlumniSans>
-                        <TimesNewRoman>{title}</TimesNewRoman>
-                      </div>
-                    </Link>
-                  </CarouselItem>
-                ),
-              )}
-            </CarouselContent>
-          </Carousel>
-        </div>
+        <Carousel className="w-full">
+          <CarouselContent className="-ml-1 ">
+            {highlights.map(
+              ({
+                title,
+                category,
+                shortDescription,
+                featuredImage,
+                slug,
+                _createdAt,
+              }) => (
+                <CarouselItem className="pl-1 basis-1/2 " key={slug.current}>
+                  <Link href="#">
+                    <div className="p-1 grid gap-1">
+                      <Image
+                        src={urlFor(featuredImage).url()}
+                        width={100}
+                        height={100}
+                        alt={title}
+                        className="w-[232px] h-[232px]  z-10"
+                      />
+                      <AlumniSans className="text-xs font-medium">
+                        {formatDate(_createdAt)}
+                      </AlumniSans>
+                      <TimesNewRoman>{title}</TimesNewRoman>
+                    </div>
+                  </Link>
+                </CarouselItem>
+              ),
+            )}
+          </CarouselContent>
+        </Carousel>
       </div>
 
       <div className=" grid p-5">
@@ -152,7 +149,7 @@ export default async function Home() {
         </Inter>
         <AlumniSans>View All</AlumniSans>
         <div>
-          <Carousel className="w-full">
+          <Carousel className="w-full z-20">
             <CarouselContent className="-ml-1">
               {highlights.map(
                 ({
