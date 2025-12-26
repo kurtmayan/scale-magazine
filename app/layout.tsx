@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
-import { Alumni_Sans, Inter } from "next/font/google";
+import {
+  Alumni_Sans,
+  Inter,
+  Tiro_Devanagari_Sanskrit,
+  Tinos,
+} from "next/font/google";
 import "./globals.css";
 
 const alumniSans = Alumni_Sans({
@@ -10,6 +15,18 @@ const alumniSans = Alumni_Sans({
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+});
+
+const tiroDevanagariSanskrit = Tiro_Devanagari_Sanskrit({
+  variable: "--font-tiro-devanagari-sanskrit",
+  subsets: ["latin"],
+  weight: "400",
+});
+
+const tinos = Tinos({
+  variable: "--font-tinos",
+  subsets: ["latin"],
+  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -25,7 +42,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${alumniSans.variable} ${inter.variable} antialiased bg-platinum`}
+        className={`${alumniSans.variable} ${inter.variable} ${tiroDevanagariSanskrit.variable} ${tinos.variable} antialiased bg-platinum`}
       >
         {children}
       </body>
