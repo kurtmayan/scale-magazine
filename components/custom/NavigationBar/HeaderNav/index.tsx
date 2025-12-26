@@ -10,7 +10,7 @@ export async function HeaderNav() {
   const categories = await client.fetch(GET_CATEGORIES);
 
   return (
-    <div className="bg-background w-full flex sm:justify-center justify-between gap-5 p-5 sm:items-end items-center  border-b-2 border-gray-300 shadow-sm sticky top-0">
+    <div className="bg-background w-full flex sm:justify-center justify-between gap-5 p-5 sm:items-end items-center border-b-2 border-gray-300 shadow-sm sticky top-0 z-50">
       <div>
         <div className="sm:hidden block">
           <MobileSidebar categories={categories} />
