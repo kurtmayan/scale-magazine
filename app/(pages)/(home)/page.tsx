@@ -35,7 +35,7 @@ export default async function Home() {
                 }`);
 
   const primaryBlog = highlights[0];
-  console.log(primaryBlog.category.tag);
+  console.log(primaryBlog.category?.tag);
   const remainingBlog = highlights.slice(1);
 
   return (
@@ -59,7 +59,7 @@ export default async function Home() {
                   slug,
                   _createdAt,
                 }) => (
-                  <CarouselItem className="pl-1 basis-1/2" key={slug.current}>
+                  <CarouselItem className="pl-1 basis-1/2" key={slug?.current}>
                     <Link href="#">
                       <div className="p-1 grid gap-1">
                         <Image
@@ -98,7 +98,7 @@ export default async function Home() {
           />
           <div className="grid gap-[5px]">
             <AlumniSans className="text-[18px] uppercase">
-              {primaryBlog.category.tag}
+              {primaryBlog.category?.tag}
             </AlumniSans>
             <TimesNewRoman className="text-xl">
               {primaryBlog.title}
@@ -111,7 +111,7 @@ export default async function Home() {
             {remainingBlog.map(({ category, featuredImage, slug, title }) => (
               <div
                 className="w-[349px] flex flex-cols gap-3"
-                key={slug.current}
+                key={slug?.current}
               >
                 <Image
                   src={urlFor(featuredImage).url()}
@@ -163,7 +163,7 @@ export default async function Home() {
                   slug,
                   _createdAt,
                 }) => (
-                  <CarouselItem className="pl-1 basis-1/2" key={slug.current}>
+                  <CarouselItem className="pl-1 basis-1/2" key={slug?.current}>
                     <Link href="#">
                       <div className="p-1 grid gap-1">
                         <Image
@@ -204,7 +204,7 @@ export default async function Home() {
           />
           <div className="grid gap-[5px]">
             <AlumniSans className="text-[18px] uppercase">
-              {primaryBlog.category.tag}
+              {primaryBlog.category?.tag}
             </AlumniSans>
             <TimesNewRoman className="text-xl">
               {primaryBlog.title}
@@ -217,7 +217,7 @@ export default async function Home() {
             {remainingBlog.map(({ category, featuredImage, slug, title }) => (
               <div
                 className="w-[349px] flex flex-cols gap-3"
-                key={slug.current}
+                key={slug?.current}
               >
                 <Image
                   src={urlFor(featuredImage).url()}
