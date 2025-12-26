@@ -7,8 +7,12 @@ import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Item from "@/components/custom/Blog/Item";
 import { client } from "@/sanity/lib/client";
-import { GET_BLOG_BY_CATEGORY, GET_BLOG_BY_SLUG } from "@/sanity/lib/queries";
-import { Blog } from "@/sanity.types";
+import {
+  GET_BLOG_BY_CATEGORY,
+  GET_BLOG_BY_SLUG,
+  GET_LATEST_BLOG,
+} from "@/sanity/lib/queries";
+import { Blog, GET_LATEST_BLOGResult } from "@/sanity.types";
 import { urlFor } from "@/sanity/lib/image";
 import { PortableText } from "@portabletext/react";
 import { capitalizeFirstLetters } from "@/lib/utils";
@@ -31,6 +35,8 @@ export default async function Article({
   const normalPosts = blogCategories
     .filter((post) => post.type !== "highlight")
     .slice(0, 3);
+
+  const recentBlog = await client.fetch<Blog[]>(GET_LATEST_BLOG);
 
   return (
     <div className="lg:w-10/12 mx-auto ">
@@ -126,7 +132,7 @@ export default async function Article({
             </div>
 
             <div className=" justify-between flex sm:block">
-              {normalPosts.map((e, index) => (
+              {recentBlog.map((e, index) => (
                 <Item key={index} slugCategory={category} {...e} />
               ))}
             </div>
@@ -140,7 +146,7 @@ export default async function Article({
         </TimesNewRoman>
 
         <div className="gap-2 flex flex-col mt-2 ">
-          {blogCategories.map((e, index) => (
+          {normalPosts.map((e, index) => (
             <ListItem {...e} key={index} />
           ))}
         </div>

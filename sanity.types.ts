@@ -330,7 +330,7 @@ export type GET_BLOGResult = Array<{
   };
 }>;
 // Variable: GET_BLOG_BY_CATEGORY
-// Query: *[  _type == "blog" &&  $tag in category[]->tag]{  title,  slug,  type,  shortDescription,  featuredImage,  category[]->{    tag  }}
+// Query: *[  _type == "blog" &&  $tag in category[]->tag]{  title,  slug,  type,  shortDescription,  featuredImage,  _createdAt,  category[]->{    tag  }}
 export type GET_BLOG_BY_CATEGORYResult = Array<{
   title: string | null;
   slug: Slug | null;
@@ -348,6 +348,7 @@ export type GET_BLOG_BY_CATEGORYResult = Array<{
     crop?: SanityImageCrop;
     _type: "image";
   } | null;
+  _createdAt: string;
   category: Array<{
     tag: string | null;
   }> | null;
@@ -410,6 +411,29 @@ export type GET_BLOG_BY_SLUGResult = {
     title: null;
   }> | null;
 } | null;
+// Variable: GET_LATEST_BLOG
+// Query: *[_type == "blog"] | order(_createdAt desc)[0...3]{    title,    slug,    shortDescription,    featuredImage,    _createdAt,    category[]->{      title    }  }
+export type GET_LATEST_BLOGResult = Array<{
+  title: string | null;
+  slug: Slug | null;
+  shortDescription: string | null;
+  featuredImage: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
+  _createdAt: string;
+  category: Array<{
+    title: null;
+  }> | null;
+}>;
 
 // Query TypeMap
 import "@sanity/client";
@@ -417,7 +441,8 @@ declare module "@sanity/client" {
   interface SanityQueries {
     '*[_type == "category"]': GET_CATEGORIESResult;
     '*[_type == "blog"]': GET_BLOGResult;
-    '*[\n  _type == "blog" &&\n  $tag in category[]->tag\n]{\n  title,\n  slug,\n  type,\n  shortDescription,\n  featuredImage,\n  category[]->{\n    tag\n  }\n}\n': GET_BLOG_BY_CATEGORYResult;
+    '*[\n  _type == "blog" &&\n  $tag in category[]->tag\n]{\n  title,\n  slug,\n  type,\n  shortDescription,\n  featuredImage,\n  _createdAt,\n  category[]->{\n    tag\n  }\n}\n': GET_BLOG_BY_CATEGORYResult;
     '*[_type == "blog" && slug.current == $slug][0]{\n  title,\n  slug,\n  shortDescription,\n  body,\n  featuredImage,\n  _createdAt,\n  author-> { \n    firstName, \n    middleName, \n    lastName, \n    avatar \n  },\n  category[]-> { title }\n}': GET_BLOG_BY_SLUGResult;
+    '*[_type == "blog"] | order(_createdAt desc)[0...3]{\n    title,\n    slug,\n    shortDescription,\n    featuredImage,\n    _createdAt,\n    category[]->{\n      title\n    }\n  }': GET_LATEST_BLOGResult;
   }
 }

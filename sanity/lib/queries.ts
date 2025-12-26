@@ -36,3 +36,15 @@ export const GET_BLOG_BY_SLUG =
   },
   category[]-> { title }
 }`);
+
+export const GET_LATEST_BLOG =
+  defineQuery(`*[_type == "blog"] | order(_createdAt desc)[0...3]{
+    title,
+    slug,
+    shortDescription,
+    featuredImage,
+    _createdAt,
+    category[]->{
+      title
+    }
+  }`);
