@@ -42,7 +42,7 @@ export default async function Page({
 
       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 px-5 justify-items-center justify-around">
         {normalPosts.map((e, index) => (
-          <Item key={index} {...e} />
+          <Item key={index} slugCategory={category} {...e} />
         ))}
       </div>
 
