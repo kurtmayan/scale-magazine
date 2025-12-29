@@ -52,7 +52,7 @@ export function MobileSidebar(props: { categories: Array<Category> }) {
                     key={index}
                   >
                     <AccordionItem value="item-1">
-                      <AccordionTrigger className="py-2 px-5 uppercase font-semibold text-2xl font-alumni-sans">
+                      <AccordionTrigger className="py-2 px-5 uppercase font-semibold text-2xl font-alumni-sans items-center rounded-none">
                         {nav.label}
                       </AccordionTrigger>
                       <AccordionContent className="flex flex-col">
@@ -78,7 +78,7 @@ export function MobileSidebar(props: { categories: Array<Category> }) {
                     key={index}
                   >
                     <AccordionItem value="item-1">
-                      <AccordionTrigger className="py-2 px-5 uppercase font-semibold text-2xl font-alumni-sans">
+                      <AccordionTrigger className="py-2 px-5 uppercase font-semibold text-2xl font-alumni-sans items-center rounded-none">
                         {nav.label}
                       </AccordionTrigger>
                       <AccordionContent className="flex flex-col">
