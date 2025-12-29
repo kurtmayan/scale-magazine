@@ -38,11 +38,32 @@ export async function HeaderNav() {
                         {nav.label}
                       </AlumniSans>
                     </PopoverTrigger>
-                    <PopoverContent className="w-48 p-7 border border-[#111111]/50 rounded-none mt-4.5">
+                    <PopoverContent className="w-56 p-7 border border-[#111111]/50 rounded-none mt-4.5">
                       {categories.map((e, index) => (
                         <Link key={index} href={"/blog/" + e.tag}>
                           <AlumniSans className=" uppercase text-[32px] font-medium text-[#111111]">
                             {e.tag}
+                          </AlumniSans>
+                        </Link>
+                      ))}
+                    </PopoverContent>
+                  </Popover>
+                );
+              }
+
+              if (nav.label == "more") {
+                return (
+                  <Popover key={index}>
+                    <PopoverTrigger asChild>
+                      <AlumniSans className="uppercase font-medium sm:text-[28px]">
+                        {nav.label}
+                      </AlumniSans>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-56 p-7 border border-[#111111]/50 rounded-none mt-4.5">
+                      {nav.child?.map((e) => (
+                        <Link key={index} href={e.url}>
+                          <AlumniSans className=" uppercase text-[32px] font-medium text-[#111111]">
+                            {e.label}
                           </AlumniSans>
                         </Link>
                       ))}
