@@ -1,3 +1,6 @@
+import { client } from "@/sanity/lib/client";
+import { GET_CATEGORIES } from "@/sanity/lib/queries";
+
 export type NavLinkType = {
   url: string;
   label: string;

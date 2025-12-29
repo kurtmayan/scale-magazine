@@ -23,6 +23,8 @@ import { Category } from "@/sanity.types";
 
 export function MobileSidebar(props: { categories: Array<Category> }) {
   const pathname = usePathname();
+  const isIndustriesRoute = pathname.startsWith("/blog/");
+  const isMoreRoute = pathname.startsWith("/more");
 
   return (
     <Sheet>
@@ -43,51 +45,35 @@ export function MobileSidebar(props: { categories: Array<Category> }) {
           <SheetDescription />
           <div className="grid gap-5">
             {headerNavLink.map((nav, index) => {
-              if (nav.hasChild && nav.label == "industries") {
+              if (nav.hasChild) {
                 return (
                   <Accordion
+                    key={index}
                     type="single"
                     collapsible
-                    className="w-full"
-                    key={index}
+                    defaultValue={isIndustriesRoute ? "industries" : undefined}
+                    className="w-full rounded-none"
                   >
                     <AccordionItem value="item-1">
-                      <AccordionTrigger className="py-2 px-5 uppercase font-semibold text-2xl font-alumni-sans">
+                      <AccordionTrigger
+                        className={`
+                          py-2 px-5 uppercase font-semibold text-2xl font-alumni-sans rounded-none justify-between items-center
+                          ${isIndustriesRoute ? "bg-neutral-900 text-white" : "bg-white text-black"}
+                        `}
+                      >
                         {nav.label}
                       </AccordionTrigger>
-                      <AccordionContent className="flex flex-col">
+                      <AccordionContent
+                        className={`flex flex-col ${
+                          isIndustriesRoute ? "bg-neutral-900" : "bg-white"
+                        }`}
+                      >
                         {props.categories.map((e, index) => (
                           <SheetClose
                             key={index}
-                            className={`${"/blog/" + e.tag == decodeURIComponent(pathname) ? "bg-black text-white" : "bg-transparent text-black"} py-2 px-6 uppercase font-semibold text-2xl font-alumni-sans text-left`}
+                            className={`${"/blog/" + e.tag == pathname ? "bg-black text-white" : "bg-transparent text-black"} py-2 px-6 uppercase font-semibold text-2xl font-alumni-sans text-left`}
                           >
                             <Link href={"/blog/" + e.tag}>{e.tag}</Link>
-                          </SheetClose>
-                        ))}
-                      </AccordionContent>
-                    </AccordionItem>
-                  </Accordion>
-                );
-              }
-              if (nav.hasChild && nav.label == "more") {
-                return (
-                  <Accordion
-                    type="single"
-                    collapsible
-                    className="w-full"
-                    key={index}
-                  >
-                    <AccordionItem value="item-1">
-                      <AccordionTrigger className="py-2 px-5 uppercase font-semibold text-2xl font-alumni-sans">
-                        {nav.label}
-                      </AccordionTrigger>
-                      <AccordionContent className="flex flex-col">
-                        {nav.child?.map((e) => (
-                          <SheetClose
-                            key={index}
-                            className={`${e.url == pathname ? "bg-black text-white" : "bg-transparent text-black"} py-2 px-6 uppercase font-semibold text-2xl font-alumni-sans text-left`}
-                          >
-                            <Link href={e.url}>{e.label}</Link>
                           </SheetClose>
                         ))}
                       </AccordionContent>
