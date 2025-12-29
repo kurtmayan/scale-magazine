@@ -1,4 +1,5 @@
 import { HomepageBanner } from "@/components/custom/Banner";
+import CategoryBanner from "@/components/custom/Banner/CategoryBanner";
 import {
   AlumniSans,
   Inter,
@@ -42,46 +43,14 @@ export default async function Home() {
     <div>
       <HomepageBanner />
       {/* Highlight Section */}
-      <div className="bg-[#e5e5e5] p-5">
-        <div className=" grid gap-3">
-          <Bar />
-          <TimesNewRoman className="text-[28px]">Highlights</TimesNewRoman>
-        </div>
-        <Carousel className="w-full">
-          <CarouselContent className="-ml-1 ">
-            {highlights.map(
-              ({
-                title,
-                category,
-                shortDescription,
-                featuredImage,
-                slug,
-                _createdAt,
-              }) => (
-                <CarouselItem className="pl-1 basis-1/2 " key={slug.current}>
-                  <Link href="#">
-                    <div className="p-1 grid gap-1">
-                      <Image
-                        src={urlFor(featuredImage).url()}
-                        width={100}
-                        height={100}
-                        alt={title}
-                        className="w-[232px] h-[232px]  z-10"
-                      />
-                      <AlumniSans className="text-xs font-medium">
-                        {formatDate(_createdAt)}
-                      </AlumniSans>
-                      <TimesNewRoman>{title}</TimesNewRoman>
-                    </div>
-                  </Link>
-                </CarouselItem>
-              ),
-            )}
-          </CarouselContent>
-        </Carousel>
-        <div>
+      <div className="bg-[#e5e5e5] xl:py-20 p-5">
+        <div className="xl:w-[1440px] xl:mx-auto">
+          <div className=" grid gap-3">
+            <Bar />
+            <TimesNewRoman className="text-[28px]">Highlights</TimesNewRoman>
+          </div>
           <Carousel className="w-full">
-            <CarouselContent className="-ml-1">
+            <CarouselContent className="-ml-1 ">
               {highlights.map(
                 ({
                   title,
@@ -91,7 +60,10 @@ export default async function Home() {
                   slug,
                   _createdAt,
                 }) => (
-                  <CarouselItem className="pl-1 basis-1/2" key={slug?.current}>
+                  <CarouselItem
+                    className="pl-1 basis-1/2 md:basis-1/3 lg:basis-1/4"
+                    key={slug.current}
+                  >
                     <Link href="#">
                       <div className="p-1 grid gap-1">
                         <Image
@@ -99,7 +71,7 @@ export default async function Home() {
                           width={100}
                           height={100}
                           alt={title}
-                          className="w-auto h-[232px]"
+                          className="w-[177px] h-[232px] lg:w-full"
                         />
                         <AlumniSans className="text-xs font-medium">
                           {formatDate(_createdAt)}
@@ -115,170 +87,84 @@ export default async function Home() {
         </div>
       </div>
 
-      <div className=" grid p-5">
-        <div>
-          <Bar />
-          <TimesNewRoman className="text-[28px]">Real State</TimesNewRoman>
-        </div>
-        <div>
-          <Image
-            src={urlFor(primaryBlog.featuredImage).url()}
-            width={100}
-            height={100}
-            alt={primaryBlog.title}
-            className="w-full"
-          />
-          <div className="grid gap-[5px]">
-            <AlumniSans className="text-[18px] uppercase">
-              {primaryBlog.category?.tag}
-            </AlumniSans>
-            <TimesNewRoman className="text-xl">
-              {primaryBlog.title}
-            </TimesNewRoman>
-            <Inter className="text-xs font-light">
-              {primaryBlog.shortDescription}
-            </Inter>
-          </div>
-          <div className="grid gap-5 my-5">
-            {remainingBlog.map(({ category, featuredImage, slug, title }) => (
-              <div
-                className="w-[349px] flex flex-cols gap-3"
-                key={slug?.current}
-              >
-                <Image
-                  src={urlFor(featuredImage).url()}
-                  alt={title}
-                  width={150}
-                  height={120}
-                  className="w-[150px] h-[120px]"
-                />
-                <div>
-                  <AlumniSans className="text-sm uppercase">
-                    {category.tag}
-                  </AlumniSans>
-                  <TimesNewRoman className="text-[16px]">{title}</TimesNewRoman>
-                </div>
-              </div>
-            ))}
-          </div>
-          <Separator className="bg-black" />
-          <Link
-            href={"#"}
-            className="flex gap-1 justify-center items-center my-4"
-          >
-            <AlumniSans className="text-xl uppercase">
-              More from Real State
-            </AlumniSans>
-            <MoveRight className="size-4" />
-          </Link>
-        </div>
-      </div>
+      <CategoryBanner category="Real State" blogs={highlights} />
 
       {/* Cover Story */}
-      <div className="p-5">
-        <TimesNewRoman className="text-[28px]">Cover Story</TimesNewRoman>
-        <Inter className="text-xs">
-          Take a deeper dive into the fascinating stories, iconic brands, and
-          groundbreaking trends that have shaped the e-commerce landscape over
-          the years, all featured in our magazine editors.
-        </Inter>
-        <AlumniSans>View All</AlumniSans>
+      <div className="xl:w-[1440px] xl:mx-auto xl:py-20 p-5 bg-[#D9D9D9] xl:grid xl:grid-cols-2 gap-20">
+        <div className="flex flex-col xl:gap-20 gap-3">
+          <TimesNewRoman className="text-[28px] xl:text-6xl">
+            Cover Story
+          </TimesNewRoman>
+          <Inter className="text-xs xl:text-3xl font-light">
+            Take a deeper dive into the fascinating stories, iconic brands, and
+            groundbreaking trends that have shaped the e-commerce landscape over
+            the years, all featured in our magazine editions.
+          </Inter>
+          <AlumniSans className="xl:text-3xl">View All</AlumniSans>
+        </div>
+
         <div>
-          <Carousel className="w-full z-20">
+          <Carousel className="w-full z-20 xl:hidden">
             <CarouselContent className="-ml-1">
-              {highlights.map(
-                ({
-                  title,
-                  category,
-                  shortDescription,
-                  featuredImage,
-                  slug,
-                  _createdAt,
-                }) => (
-                  <CarouselItem className="pl-1 basis-1/2" key={slug?.current}>
-                    <Link href="#">
-                      <div className="p-1 grid gap-1">
-                        <Image
-                          src={urlFor(featuredImage).url()}
-                          width={100}
-                          height={100}
-                          alt={title}
-                          className="w-auto h-[158px]"
-                        />
-                        <AlumniSans className="text-xs font-medium">
-                          {formatDate(_createdAt)}
-                        </AlumniSans>
-                        <TimesNewRoman className="text-sm">
-                          {title}
-                        </TimesNewRoman>
-                      </div>
-                    </Link>
-                  </CarouselItem>
-                ),
-              )}
+              {highlights
+                .slice(0, 4)
+                .map(
+                  ({
+                    title,
+                    category,
+                    shortDescription,
+                    featuredImage,
+                    slug,
+                    _createdAt,
+                  }) => (
+                    <CarouselItem className="pl-1 basis-1/2" key={slug.current}>
+                      <Link href="#">
+                        <div className="p-1 grid gap-1">
+                          <Image
+                            src={urlFor(featuredImage).url()}
+                            width={100}
+                            height={100}
+                            alt={title}
+                            className="w-auto h-[158px]"
+                          />
+                          <AlumniSans className="text-xs font-medium">
+                            {formatDate(_createdAt)}
+                          </AlumniSans>
+                          <TimesNewRoman className="text-sm">
+                            {title}
+                          </TimesNewRoman>
+                        </div>
+                      </Link>
+                    </CarouselItem>
+                  ),
+                )}
             </CarouselContent>
           </Carousel>
+          <div className="hidden xl:flex flex-col gap-5">
+            {highlights
+              .slice(0, 3)
+              .map(({ slug, title, category, featuredImage }) => (
+                <div key={slug.current} className="flex flex-row gap-5">
+                  <Image
+                    src={urlFor(featuredImage).url()}
+                    alt={slug.current}
+                    width={100}
+                    height={100}
+                    className="w-[185px] h-[192px]"
+                  />
+                  <div>
+                    <AlumniSans className="uppercase text-2xl">
+                      {category.tag}
+                    </AlumniSans>
+                    <TimesNewRoman className="text-2xl">{title}</TimesNewRoman>
+                  </div>
+                </div>
+              ))}
+          </div>
         </div>
       </div>
 
-      <div className=" grid p-5">
-        <div>
-          <Bar />
-          <TimesNewRoman className="text-[28px]">E-Commerce</TimesNewRoman>
-        </div>
-        <div>
-          <Image
-            src={urlFor(primaryBlog.featuredImage).url()}
-            width={100}
-            height={100}
-            alt={primaryBlog.title}
-            className="w-full"
-          />
-          <div className="grid gap-[5px]">
-            <AlumniSans className="text-[18px] uppercase">
-              {primaryBlog.category?.tag}
-            </AlumniSans>
-            <TimesNewRoman className="text-xl">
-              {primaryBlog.title}
-            </TimesNewRoman>
-            <Inter className="text-xs font-light">
-              {primaryBlog.shortDescription}
-            </Inter>
-          </div>
-          <div className="grid gap-5 my-5">
-            {remainingBlog.map(({ category, featuredImage, slug, title }) => (
-              <div
-                className="w-[349px] flex flex-cols gap-3"
-                key={slug?.current}
-              >
-                <Image
-                  src={urlFor(featuredImage).url()}
-                  alt={title}
-                  width={150}
-                  height={120}
-                  className="w-[150px] h-[120px]"
-                />
-                <div>
-                  <AlumniSans className="text-sm uppercase">
-                    {category.tag}
-                  </AlumniSans>
-                  <TimesNewRoman className="text-[16px]">{title}</TimesNewRoman>
-                </div>
-              </div>
-            ))}
-          </div>
-          <Separator className="bg-black" />
-          <Link
-            href={"#"}
-            className="flex gap-1 justify-center items-center my-4"
-          >
-            <AlumniSans className="text-xl uppercase">
-              More from E-Commerce
-            </AlumniSans>
-            <MoveRight className="size-4" />
-          </Link>
-        </div>
-      </div>
+      <CategoryBanner category="E-Commerce" blogs={highlights} />
     </div>
   );
 }
