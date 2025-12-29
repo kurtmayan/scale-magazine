@@ -34,7 +34,7 @@ export default async function Page({
       <div className="max-sm:ps-5 max-sm:pt-5 lg:pt-16">
         <div className="h-2.5 w-20 bg-[#5C5C5C] rounded-full"></div>
         <h1 className="font-times-new-roman max-sm:text-[28px] lg:text-[64px]">
-          {capitalizeFirstLetters(category)}
+          {capitalizeFirstLetters(decodeURIComponent(category))}
         </h1>
       </div>
 

@@ -29,7 +29,7 @@ export default function Item({
       <div className="relative aspect-square max-sm:h-[112px] max-sm:w-[120px] sm:h-[194px] sm:w-[205px] -z-10">
         <Image
           src={urlFor(props.featuredImage || "").url()}
-          alt={props._id}
+          alt={props._id + " images"}
           fill
           priority
           className="object-cover px-1"

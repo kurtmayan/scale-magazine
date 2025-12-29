@@ -6,13 +6,13 @@ import {
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Item from "@/components/custom/Blog/Item";
-import { client } from "@/sanity/lib/client";
 import {
   GET_BLOG_BY_CATEGORY,
   GET_BLOG_BY_SLUG,
   GET_LATEST_BLOG,
 } from "@/sanity/lib/queries";
-import { Blog, GET_LATEST_BLOGResult } from "@/sanity.types";
+import { client } from "@/sanity/lib/client";
+import { Blog } from "@/sanity.types";
 import { urlFor } from "@/sanity/lib/image";
 import { PortableText } from "@portabletext/react";
 import { capitalizeFirstLetters } from "@/lib/utils";

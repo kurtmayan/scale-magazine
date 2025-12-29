@@ -1,12 +1,13 @@
+import LayoutShell from "@/components/custom/LayoutShell";
 import { FooterNav, HeaderNav } from "@/components/custom/NavigationBar";
 import { ReactNode } from "react";
 
 export default function PageLayout({ children }: { children: ReactNode }) {
   return (
-    <div>
+    <LayoutShell>
       <HeaderNav />
       <main>{children}</main>
       <FooterNav />
-    </div>
+    </LayoutShell>
   );
 }
