@@ -50,6 +50,7 @@ export async function HeaderNav() {
                   </Popover>
                 );
               }
+
               return (
                 <Link key={index} href={nav.url}>
                   <AlumniSans className="uppercase font-medium sm:text-[28px]">

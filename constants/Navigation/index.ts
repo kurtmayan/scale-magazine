@@ -2,6 +2,7 @@ export type NavLinkType = {
   url: string;
   label: string;
   hasChild?: boolean;
+  child?: NavLinkType[];
 };
 
 export const headerNavLink: NavLinkType[] = [
@@ -29,6 +30,13 @@ export const headerNavLink: NavLinkType[] = [
   {
     url: "/more",
     label: "more",
+    hasChild: true,
+    child: [
+      {
+        url: "/more/c-suite-office",
+        label: "c-suite office",
+      },
+    ],
   },
 ];
 
