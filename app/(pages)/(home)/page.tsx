@@ -36,6 +36,7 @@ export default async function Home() {
                 }`);
 
   const primaryBlog = highlights[0];
+  console.log(primaryBlog.category?.tag);
   const remainingBlog = highlights.slice(1);
 
   return (

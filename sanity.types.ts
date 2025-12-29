@@ -260,13 +260,11 @@ export type AllSanitySchemaTypes =
   | SanityAssetSourceData
   | SanityImageAsset
   | Geopoint;
-
 export declare const internalGroqTypeReferenceTo: unique symbol;
-
-// Source: sanity/lib/queries.ts
+// Source: ./sanity/lib/queries.ts
 // Variable: GET_CATEGORIES
 // Query: *[_type == "category"]
-export type GET_CATEGORIES_RESULT = Array<{
+export type GET_CATEGORIESResult = Array<{
   _id: string;
   _type: "category";
   _createdAt: string;
@@ -274,11 +272,9 @@ export type GET_CATEGORIES_RESULT = Array<{
   _rev: string;
   tag?: string;
 }>;
-
-// Source: sanity/lib/queries.ts
 // Variable: GET_BLOG
 // Query: *[_type == "blog"]
-export type GET_BLOG_RESULT = Array<{
+export type GET_BLOGResult = Array<{
   _id: string;
   _type: "blog";
   _createdAt: string;
@@ -333,12 +329,120 @@ export type GET_BLOG_RESULT = Array<{
     [internalGroqTypeReferenceTo]?: "author";
   };
 }>;
+// Variable: GET_BLOG_BY_CATEGORY
+// Query: *[  _type == "blog" &&  $tag in category[]->tag]{  title,  slug,  type,  shortDescription,  featuredImage,  _createdAt,  category[]->{    tag  }}
+export type GET_BLOG_BY_CATEGORYResult = Array<{
+  title: string | null;
+  slug: Slug | null;
+  type: "highlight" | null;
+  shortDescription: string | null;
+  featuredImage: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
+  _createdAt: string;
+  category: Array<{
+    tag: string | null;
+  }> | null;
+}>;
+// Variable: GET_BLOG_BY_SLUG
+// Query: *[_type == "blog" && slug.current == $slug][0]{  title,  slug,  shortDescription,  body,  featuredImage,  _createdAt,  author-> {     firstName,     middleName,     lastName,     avatar   },  category[]-> { title }}
+export type GET_BLOG_BY_SLUGResult = {
+  title: string | null;
+  slug: Slug | null;
+  shortDescription: string | null;
+  body: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }> | null;
+  featuredImage: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
+  _createdAt: string;
+  author: {
+    firstName: string | null;
+    middleName: string | null;
+    lastName: string | null;
+    avatar: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+  } | null;
+  category: Array<{
+    title: null;
+  }> | null;
+} | null;
+// Variable: GET_LATEST_BLOG
+// Query: *[_type == "blog"] | order(_createdAt desc)[0...3]{    title,    slug,    shortDescription,    featuredImage,    _createdAt,    category[]->{      title    }  }
+export type GET_LATEST_BLOGResult = Array<{
+  title: string | null;
+  slug: Slug | null;
+  shortDescription: string | null;
+  featuredImage: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
+  _createdAt: string;
+  category: Array<{
+    title: null;
+  }> | null;
+}>;
 
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '*[_type == "category"]': GET_CATEGORIES_RESULT;
-    '*[_type == "blog"]': GET_BLOG_RESULT;
+    '*[_type == "category"]': GET_CATEGORIESResult;
+    '*[_type == "blog"]': GET_BLOGResult;
+    '*[\n  _type == "blog" &&\n  $tag in category[]->tag\n]{\n  title,\n  slug,\n  type,\n  shortDescription,\n  featuredImage,\n  _createdAt,\n  category[]->{\n    tag\n  }\n}\n': GET_BLOG_BY_CATEGORYResult;
+    '*[_type == "blog" && slug.current == $slug][0]{\n  title,\n  slug,\n  shortDescription,\n  body,\n  featuredImage,\n  _createdAt,\n  author-> { \n    firstName, \n    middleName, \n    lastName, \n    avatar \n  },\n  category[]-> { title }\n}': GET_BLOG_BY_SLUGResult;
+    '*[_type == "blog"] | order(_createdAt desc)[0...3]{\n    title,\n    slug,\n    shortDescription,\n    featuredImage,\n    _createdAt,\n    category[]->{\n      title\n    }\n  }': GET_LATEST_BLOGResult;
   }
 }
