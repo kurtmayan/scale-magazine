@@ -1,4 +1,4 @@
-import LayoutShell from "@/components/custom/LayoutShell";
+import LayoutShell from "@/components/custom/Layouts/LayoutShell";
 import { FooterNav, HeaderNav } from "@/components/custom/NavigationBar";
 import { ReactNode } from "react";
 

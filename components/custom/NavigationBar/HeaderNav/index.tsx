@@ -5,7 +5,7 @@ import { MobileSidebar } from "../../Sidebar";
 import { client } from "@/sanity/lib/client";
 import { GET_CATEGORIES } from "@/sanity/lib/queries";
 import Logo from "@/components/icons/logo";
-import HeaderNavLayout from "./layout";
+import HeaderNavLayout from "../../Layouts/HeaderNavLayout";
 import {
   Popover,
   PopoverContent,
