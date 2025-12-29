@@ -51,7 +51,7 @@ export default async function CSuiteOffice() {
               <div className="relative aspect-video -z-10 ">
                 <Image
                   src={urlFor(items?.featuredImage ?? "").url()}
-                  alt="Hello"
+                  alt={items.title + " images"}
                   fill
                   priority
                   className="object-cover sm:w-80.75 sm:h-60"
