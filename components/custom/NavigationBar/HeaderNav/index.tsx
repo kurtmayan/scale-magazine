@@ -25,7 +25,7 @@ export async function HeaderNav() {
       </div>
       <div className="grid gap-3">
         <div className="m-auto grid place-items-center">
-          <Logo className={"sm:w-[150px] w-[100px] h-[50px]"} />
+          <Logo className={"sm:w-37.5 w-25 h-12.5"} />
         </div>
         <div className="hidden sm:block">
           <div className="flex gap-10">
@@ -83,7 +83,7 @@ export async function HeaderNav() {
           </div>
         </div>
       </div>
-      <Search />
+      <Search className="sm:hidden" />
     </HeaderNavLayout>
   );
 }
