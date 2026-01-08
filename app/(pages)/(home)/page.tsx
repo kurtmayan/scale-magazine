@@ -65,14 +65,15 @@ export default async function Home() {
                     key={slug.current}
                   >
                     <Link href="#">
-                      <div className="p-1 grid gap-1">
-                        <Image
-                          src={urlFor(featuredImage).url()}
-                          width={100}
-                          height={100}
-                          alt={title}
-                          className="w-[177px] h-[232px] lg:w-full"
-                        />
+                      <div className="p-1 grid gap-1 ">
+                        <div className="w-[177px] h-[232px] lg:w-full relative aspect-square">
+                          <Image
+                            src={urlFor(featuredImage).url()}
+                            alt={title}
+                            fill
+                            objectFit="cover"
+                          />
+                        </div>
                         <AlumniSans className="text-xs font-medium">
                           {formatDate(_createdAt)}
                         </AlumniSans>
@@ -120,13 +121,14 @@ export default async function Home() {
                     <CarouselItem className="pl-1 basis-1/2" key={slug.current}>
                       <Link href="#">
                         <div className="p-1 grid gap-1">
-                          <Image
-                            src={urlFor(featuredImage).url()}
-                            width={100}
-                            height={100}
-                            alt={title}
-                            className="w-auto h-[158px]"
-                          />
+                          <div className="w-auto h-[158px] relative aspect-square">
+                            <Image
+                              src={urlFor(featuredImage).url()}
+                              alt={title}
+                              fill
+                              objectFit="cover"
+                            />
+                          </div>
                           <AlumniSans className="text-xs font-medium">
                             {formatDate(_createdAt)}
                           </AlumniSans>
@@ -145,13 +147,14 @@ export default async function Home() {
               .slice(0, 3)
               .map(({ slug, title, category, featuredImage }) => (
                 <div key={slug.current} className="flex flex-row gap-5">
-                  <Image
-                    src={urlFor(featuredImage).url()}
-                    alt={slug.current}
-                    width={100}
-                    height={100}
-                    className="w-[185px] h-[192px]"
-                  />
+                  <div className="w-[185px] h-[192px] relative aspect-square">
+                    <Image
+                      src={urlFor(featuredImage).url()}
+                      alt={slug.current}
+                      objectFit="cover"
+                      fill
+                    />
+                  </div>
                   <div>
                     <AlumniSans className="uppercase text-2xl">
                       {category.tag}

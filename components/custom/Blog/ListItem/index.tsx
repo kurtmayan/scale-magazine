@@ -20,7 +20,7 @@ export default function ListItem(props: Blog) {
         <TimesNewRoman className="max-sm:text-base sm:text-4xl leading-[118.9%]">
           {props.title}
         </TimesNewRoman>
-        <Inter className="max-sm:text-xs sm:text-2xl  text-[#1E1E1E] font-light leading-[130%] mt-1">
+        <Inter className="max-sm:text-xs sm:text-2xl  text-[#1E1E1E] font-light leading-[130%] mt-1 line-clamp-3">
           {props.shortDescription}
         </Inter>
       </div>

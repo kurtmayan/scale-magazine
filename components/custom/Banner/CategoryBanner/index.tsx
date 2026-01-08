@@ -29,24 +29,28 @@ export default function CategoryBanner({
       {/* Desktop */}
       <div className="hidden xl:grid grid-cols-2 gap-20">
         <div className="flex flex-col gap-[90px]">
-          <Image
-            src={urlFor(primaryBlog.featuredImage).url()}
-            alt={primaryBlog.title}
-            width={100}
-            height={100}
-            className="w-[716px] h-[859px]"
-          />
+          <div className="relative aspect-video -z-10 w-[716px] h-[859px]">
+            <Image
+              src={urlFor(primaryBlog.featuredImage).url()}
+              alt={primaryBlog.title}
+              fill
+              priority
+              objectFit="cover"
+            />
+          </div>
           <div className="grid grid-cols-2 gap-[90px]">
             {rightSectionBlog.map(
               ({ title, slug, category, featuredImage }) => (
                 <div key={slug.current} className="flex flex-col gap-3">
-                  <Image
-                    src={urlFor(featuredImage).url()}
-                    width={100}
-                    height={100}
-                    alt={slug.current}
-                    className="w-full h-[290px]"
-                  />
+                  <div className="relative aspect-square -z-10 w-full h-[290px]">
+                    <Image
+                      src={urlFor(featuredImage).url()}
+                      alt={slug.current}
+                      fill
+                      priority
+                      objectFit="cover"
+                    />
+                  </div>
                   <AlumniSans className="uppercase text-2xl">
                     {category.tag}
                   </AlumniSans>
@@ -73,13 +77,14 @@ export default function CategoryBanner({
           </div>
           <div className="flex flex-col gap-20">
             <div className="flex flex-row gap-5 items-center">
-              <Image
-                src={urlFor(leftSectionFirstBlog.featuredImage).url()}
-                width={100}
-                height={100}
-                alt={leftSectionFirstBlog.title}
-                className="w-[274px] h-[258px]"
-              />
+              <div className="aspect-square w-[274px] h-[258px] relative">
+                <Image
+                  src={urlFor(leftSectionFirstBlog.featuredImage).url()}
+                  alt={leftSectionFirstBlog.title}
+                  fill
+                  objectFit="cover"
+                />
+              </div>
               <div className="flex flex-col ">
                 <AlumniSans className="uppercase text-2xl">
                   {leftSectionFirstBlog.category.tag}
@@ -91,13 +96,14 @@ export default function CategoryBanner({
             </div>
           </div>
           <div className="flex flex-col gap-5">
-            <Image
-              src={urlFor(leftSectionLastBlog.featuredImage).url()}
-              alt={leftSectionLastBlog.slug.current}
-              width={100}
-              height={100}
-              className="w-[683px] h-[620px]"
-            />
+            <div className="w-[683px] h-[620px] aspect-square relative">
+              <Image
+                src={urlFor(leftSectionLastBlog.featuredImage).url()}
+                alt={leftSectionLastBlog.slug.current}
+                fill
+                objectFit="cover"
+              />
+            </div>
             <div className="flex flex-col gap-5">
               <AlumniSans className="uppercase text-[28px]">
                 {leftSectionLastBlog.category.tag}
@@ -112,13 +118,14 @@ export default function CategoryBanner({
 
       {/* Mobile */}
       <div className="xl:hidden">
-        <Image
-          src={urlFor(primaryBlog.featuredImage).url()}
-          width={100}
-          height={100}
-          alt={primaryBlog.title}
-          className="w-full"
-        />
+        <div className="relative aspect-square w-full">
+          <Image
+            src={urlFor(primaryBlog.featuredImage).url()}
+            alt={primaryBlog.title}
+            fill
+            objectFit="cover"
+          />
+        </div>
         <div className="grid gap-[5px]">
           <AlumniSans className="text-[18px] uppercase">
             {primaryBlog.category.tag}
@@ -131,13 +138,14 @@ export default function CategoryBanner({
         <div className="grid gap-5 my-5">
           {remainingBlogs.map(({ category, featuredImage, slug, title }) => (
             <div className="w-[349px] flex flex-cols gap-3" key={slug.current}>
-              <Image
-                src={urlFor(featuredImage).url()}
-                alt={title}
-                width={150}
-                height={120}
-                className="w-[150px] h-[120px]"
-              />
+              <div className="w-[150px] h-[120px] relative aspect-video">
+                <Image
+                  src={urlFor(featuredImage).url()}
+                  alt={title}
+                  fill
+                  objectFit="cover"
+                />
+              </div>
               <div>
                 <AlumniSans className="text-sm uppercase">
                   {category.tag}

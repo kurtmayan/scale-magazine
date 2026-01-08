@@ -9,7 +9,7 @@ export default function Highlight(props: Blog) {
   const urlFor = (source: SanityImageSource) => builder.image(source);
   return (
     <div>
-      <div className="relative aspect-video">
+      <div className="relative aspect-square">
         <Image
           src={urlFor(props.featuredImage || "")
             .width(800)

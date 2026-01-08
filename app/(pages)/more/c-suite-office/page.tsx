@@ -48,7 +48,7 @@ export default async function CSuiteOffice() {
         <div className="grid grid-cols-3 justify-items-center gap-5">
           {highlights.map((items, index) => (
             <div key={index} className="sm:w-80.75">
-              <div className="relative aspect-video -z-10 ">
+              <div className="relative aspect-square -z-10 ">
                 <Image
                   src={urlFor(items?.featuredImage ?? "").url()}
                   alt={items.title + " images"}
