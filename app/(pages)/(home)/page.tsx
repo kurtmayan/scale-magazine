@@ -13,12 +13,6 @@ import {
 } from "@/components/ui/carousel";
 import { capitalizeWords } from "@/lib/capitalizeWords";
 import formatDate from "@/lib/formatDate";
-import { randomNumber } from "@/lib/randomNumber";
-import {
-  GET_BLOG_HIGHLIGHTResult,
-  GET_CATEGORY_BANNERResult,
-  GET_COVER_STORYResult,
-} from "@/sanity.types";
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import { defineQuery } from "next-sanity";
@@ -29,8 +23,7 @@ export default async function Home() {
   const GET_BLOG_HIGHLIGHT = defineQuery(
     `*[_type == "blog" && type == "highlight"]`,
   );
-  const highlights: GET_BLOG_HIGHLIGHTResult =
-    await client.fetch(GET_BLOG_HIGHLIGHT);
+  const highlights = await client.fetch(GET_BLOG_HIGHLIGHT);
   const GET_CATEGORY_BANNER = defineQuery(`*[
     _type == "blog" &&
       references(*[_type == "category" && tag == $categoryName][0]._id)
@@ -44,14 +37,6 @@ export default async function Home() {
       _createdAt
     }
   `);
-
-  const GET_ALL_CATEGORY = defineQuery(`*[_type == "category"]{
-      _id,
-      tag
-    }
-  `);
-
-  const allCategory = await client.fetch(GET_ALL_CATEGORY);
 
   const FIRSTCATEGORY = "business";
   const categoryBanner = await client.fetch(GET_CATEGORY_BANNER, {
@@ -93,8 +78,7 @@ export default async function Home() {
       }
     }
   `);
-
-  const coverStory: GET_COVER_STORYResult = await client.fetch(GET_COVER_STORY);
+  const coverStory = await client.fetch(GET_COVER_STORY);
 
   return (
     <div>
