@@ -20,9 +20,25 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default async function Home() {
-  const GET_BLOG_HIGHLIGHT = defineQuery(
-    `*[_type == "blog" && type == "highlight"]`,
-  );
+  const GET_BLOG_HIGHLIGHT =
+    defineQuery(`*[_type == "blog" && type == "highlight"]{
+      _id,
+      title,
+      shortDescription,
+      "slug": slug.current,
+      type,
+      "categories": category[]->{
+        _id,
+        tag
+      },
+      author->{
+        firstName,
+        lastName
+      },
+      featuredImage,
+      _createdAt
+    }
+  `);
   const highlights = await client.fetch(GET_BLOG_HIGHLIGHT);
   const GET_CATEGORY_BANNER = defineQuery(`*[
     _type == "blog" &&
@@ -52,12 +68,10 @@ export default async function Home() {
     defineQuery(`*[_type == "section" && groupName == "Cover Story"][0]{
       groupName,
       description,
-
       category[]->{
         _id,
         tag
       },
-
       "blogs": *[
         _type == "blog" &&
         (
@@ -92,29 +106,34 @@ export default async function Home() {
           </div>
           <Carousel className="w-full">
             <CarouselContent className="-ml-1 ">
-              {highlights.map(({ featuredImage, title, _createdAt }, index) => (
-                <CarouselItem
-                  className="pl-1 basis-1/2 md:basis-1/3 lg:basis-1/4"
-                  key={index}
-                >
-                  <Link href="#">
-                    <div className="p-1 grid gap-1 ">
-                      <div className="w-44.25 h-58 lg:w-full relative aspect-square">
-                        <Image
-                          src={urlFor(featuredImage).url()}
-                          alt={title}
-                          fill
-                          objectFit="cover"
-                        />
+              {highlights.map(
+                (
+                  { featuredImage, title, _createdAt, slug, categories },
+                  index,
+                ) => (
+                  <CarouselItem
+                    className="pl-1 basis-1/2 md:basis-1/3 lg:basis-1/4"
+                    key={index}
+                  >
+                    <Link href={`/blog/${categories[0].tag}/${slug}`}>
+                      <div className="p-1 grid gap-1 ">
+                        <div className="w-44.25 h-58 lg:w-full relative aspect-square">
+                          <Image
+                            src={urlFor(featuredImage).url()}
+                            alt={title}
+                            fill
+                            objectFit="cover"
+                          />
+                        </div>
+                        <AlumniSans className="text-xs font-medium">
+                          {formatDate(_createdAt)}
+                        </AlumniSans>
+                        <TimesNewRoman>{title}</TimesNewRoman>
                       </div>
-                      <AlumniSans className="text-xs font-medium">
-                        {formatDate(_createdAt)}
-                      </AlumniSans>
-                      <TimesNewRoman>{title}</TimesNewRoman>
-                    </div>
-                  </Link>
-                </CarouselItem>
-              ))}
+                    </Link>
+                  </CarouselItem>
+                ),
+              )}
             </CarouselContent>
           </Carousel>
         </div>
@@ -144,7 +163,7 @@ export default async function Home() {
             <CarouselContent className="-ml-1">
               {coverStory?.blogs
                 .slice(0, 4)
-                .map(({ title, featuredImage, slug, _createdAt }) => (
+                .map(({ title, featuredImage, slug, _createdAt, category }) => (
                   <CarouselItem className="pl-1 basis-1/2" key={slug.current}>
                     <Link href="#">
                       <div className="p-1 grid gap-1">

@@ -287,24 +287,21 @@ export type AllSanitySchemaTypes =
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./app/(pages)/(home)/page.tsx
 // Variable: GET_BLOG_HIGHLIGHT
-// Query: *[_type == "blog" && type == "highlight"]
+// Query: *[_type == "blog" && type == "highlight"]{      _id,      title,      shortDescription,      "slug": slug.current,      type,      "categories": category[]->{        _id,        tag      },      author->{        firstName,        lastName      },      featuredImage,      _createdAt    }
 export type GET_BLOG_HIGHLIGHTResult = Array<{
   _id: string;
-  _type: "blog";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
   title: string;
-  category: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "category";
+  shortDescription: string;
+  slug: string;
+  type: "highlight" | null;
+  categories: Array<{
+    _id: string;
+    tag: string;
   }>;
-  tag: string;
-  type?: "highlight";
-  slug: Slug;
+  author: {
+    firstName: string;
+    lastName: string;
+  };
   featuredImage: {
     asset?: {
       _ref: string;
@@ -317,55 +314,7 @@ export type GET_BLOG_HIGHLIGHTResult = Array<{
     crop?: SanityImageCrop;
     _type: "image";
   };
-  shortDescription: string;
-  body: Array<
-    | {
-        children?: Array<{
-          marks?: Array<string>;
-          text?: string;
-          _type: "span";
-          _key: string;
-        }>;
-        style?:
-          | "blockquote"
-          | "h1"
-          | "h2"
-          | "h3"
-          | "h4"
-          | "h5"
-          | "h6"
-          | "normal";
-        listItem?: "bullet" | "number";
-        markDefs?: Array<{
-          href?: string;
-          _type: "link";
-          _key: string;
-        }>;
-        level?: number;
-        _type: "block";
-        _key: string;
-      }
-    | {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
-        media?: unknown;
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        alt?: string;
-        _type: "image";
-        _key: string;
-      }
-  >;
-  author: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "author";
-  };
+  _createdAt: string;
 }>;
 // Variable: GET_CATEGORY_BANNER
 // Query: *[    _type == "blog" &&      references(*[_type == "category" && tag == $categoryName][0]._id)    ]{      _id,      title,      featuredImage,      slug,      category,      shortDescription,      _createdAt    }
@@ -394,12 +343,6 @@ export type GET_CATEGORY_BANNERResult = Array<{
   }>;
   shortDescription: string;
   _createdAt: string;
-}>;
-// Variable: GET_ALL_CATEGORY
-// Query: *[_type == "category"]{      _id,      tag    }
-export type GET_ALL_CATEGORYResult = Array<{
-  _id: string;
-  tag: string;
 }>;
 // Variable: GET_COVER_STORY
 // Query: *[_type == "section" && groupName == "Cover Story"][0]{      groupName,      description,      category[]->{        _id,        tag      },      "blogs": *[        _type == "blog" &&        (          category._ref in ^.category[]._ref ||          count(category[@._ref in ^.category[]._ref]) > 0        )      ][0...6]{        _id,        _createdAt,        title,        slug,        featuredImage,        shortDescription,        category[]-> {          _id,          tag        }      }    }
@@ -661,10 +604,9 @@ export type GET_LATEST_BLOGResult = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '*[_type == "blog" && type == "highlight"]': GET_BLOG_HIGHLIGHTResult;
+    '*[_type == "blog" && type == "highlight"]{\n      _id,\n      title,\n      shortDescription,\n      "slug": slug.current,\n      type,\n      "categories": category[]->{\n        _id,\n        tag\n      },\n      author->{\n        firstName,\n        lastName\n      },\n      featuredImage,\n      _createdAt\n    }\n  ': GET_BLOG_HIGHLIGHTResult;
     '*[\n    _type == "blog" &&\n      references(*[_type == "category" && tag == $categoryName][0]._id)\n    ]{\n      _id,\n      title,\n      featuredImage,\n      slug,\n      category,\n      shortDescription,\n      _createdAt\n    }\n  ': GET_CATEGORY_BANNERResult;
-    '*[_type == "category"]{\n      _id,\n      tag\n    }\n  ': GET_ALL_CATEGORYResult;
-    '*[_type == "section" && groupName == "Cover Story"][0]{\n      groupName,\n      description,\n\n      category[]->{\n        _id,\n        tag\n      },\n\n      "blogs": *[\n        _type == "blog" &&\n        (\n          category._ref in ^.category[]._ref ||\n          count(category[@._ref in ^.category[]._ref]) > 0\n        )\n      ][0...6]{\n        _id,\n        _createdAt,\n        title,\n        slug,\n        featuredImage,\n        shortDescription,\n        category[]-> {\n          _id,\n          tag\n        }\n      }\n    }\n  ': GET_COVER_STORYResult;
+    '*[_type == "section" && groupName == "Cover Story"][0]{\n      groupName,\n      description,\n      category[]->{\n        _id,\n        tag\n      },\n      "blogs": *[\n        _type == "blog" &&\n        (\n          category._ref in ^.category[]._ref ||\n          count(category[@._ref in ^.category[]._ref]) > 0\n        )\n      ][0...6]{\n        _id,\n        _createdAt,\n        title,\n        slug,\n        featuredImage,\n        shortDescription,\n        category[]-> {\n          _id,\n          tag\n        }\n      }\n    }\n  ': GET_COVER_STORYResult;
     '*[_type == "category"]': GET_CATEGORIESResult;
     '*[_type == "blog"]': GET_BLOGResult;
     '*[\n  _type == "blog" &&\n  $tag in category[]->tag\n]{\n  title,\n  slug,\n  type,\n  shortDescription,\n  featuredImage,\n  _createdAt,\n  category[]->{\n    tag\n  }\n}\n': GET_BLOG_BY_CATEGORYResult;
