@@ -19,7 +19,7 @@ export type Section = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  groupName?: string;
+  groupName: string;
   description?: string;
   showExtraFields?: boolean;
   blog?: Array<{
@@ -44,7 +44,7 @@ export type Category = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  tag?: string;
+  tag: string;
 };
 
 export type Blog = {
@@ -53,18 +53,18 @@ export type Blog = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title?: string;
-  category?: Array<{
+  title: string;
+  category: Array<{
     _ref: string;
     _type: "reference";
     _weak?: boolean;
     _key: string;
     [internalGroqTypeReferenceTo]?: "category";
   }>;
-  tag?: string;
+  tag: string;
   type?: "highlight";
-  slug?: Slug;
-  featuredImage?: {
+  slug: Slug;
+  featuredImage: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -76,26 +76,50 @@ export type Blog = {
     crop?: SanityImageCrop;
     _type: "image";
   };
-  shortDescription?: string;
-  body?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
-  author?: {
+  shortDescription: string;
+  body: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?:
+          | "normal"
+          | "h1"
+          | "h2"
+          | "h3"
+          | "h4"
+          | "h5"
+          | "h6"
+          | "blockquote";
+        listItem?: "bullet" | "number";
+        markDefs?: Array<{
+          href?: string;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }
+    | {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: "image";
+        _key: string;
+      }
+  >;
+  author: {
     _ref: string;
     _type: "reference";
     _weak?: boolean;
@@ -109,10 +133,10 @@ export type Author = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  firstName?: string;
-  middleName?: string;
-  lastName?: string;
-  avatar?: {
+  firstName: string;
+  middleName: string;
+  lastName: string;
+  avatar: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -128,23 +152,23 @@ export type Author = {
 
 export type SanityImageCrop = {
   _type: "sanity.imageCrop";
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
+  top: number;
+  bottom: number;
+  left: number;
+  right: number;
 };
 
 export type SanityImageHotspot = {
   _type: "sanity.imageHotspot";
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
+  x: number;
+  y: number;
+  height: number;
+  width: number;
 };
 
 export type Slug = {
   _type: "slug";
-  current?: string;
+  current: string;
   source?: string;
 };
 
@@ -169,9 +193,9 @@ export type SanityImagePalette = {
 
 export type SanityImageDimensions = {
   _type: "sanity.imageDimensions";
-  height?: number;
-  width?: number;
-  aspectRatio?: number;
+  height: number;
+  width: number;
+  aspectRatio: number;
 };
 
 export type SanityImageMetadata = {
@@ -261,6 +285,156 @@ export type AllSanitySchemaTypes =
   | SanityImageAsset
   | Geopoint;
 export declare const internalGroqTypeReferenceTo: unique symbol;
+// Source: ./app/(pages)/(home)/page.tsx
+// Variable: GET_BLOG_HIGHLIGHT
+// Query: *[_type == "blog" && type == "highlight"]
+export type GET_BLOG_HIGHLIGHTResult = Array<{
+  _id: string;
+  _type: "blog";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title: string;
+  category: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "category";
+  }>;
+  tag: string;
+  type?: "highlight";
+  slug: Slug;
+  featuredImage: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  shortDescription: string;
+  body: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?:
+          | "blockquote"
+          | "h1"
+          | "h2"
+          | "h3"
+          | "h4"
+          | "h5"
+          | "h6"
+          | "normal";
+        listItem?: "bullet" | "number";
+        markDefs?: Array<{
+          href?: string;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }
+    | {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: "image";
+        _key: string;
+      }
+  >;
+  author: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "author";
+  };
+}>;
+// Variable: GET_CATEGORY_BANNER
+// Query: *[    _type == "blog" &&      references(*[_type == "category" && tag == $categoryName][0]._id)    ]{      _id,      title,      featuredImage,      slug,      category,      shortDescription,      _createdAt    }
+export type GET_CATEGORY_BANNERResult = Array<{
+  _id: string;
+  title: string;
+  featuredImage: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  slug: Slug;
+  category: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "category";
+  }>;
+  shortDescription: string;
+  _createdAt: string;
+}>;
+// Variable: GET_ALL_CATEGORY
+// Query: *[_type == "category"]{      _id,      tag    }
+export type GET_ALL_CATEGORYResult = Array<{
+  _id: string;
+  tag: string;
+}>;
+// Variable: GET_COVER_STORY
+// Query: *[_type == "section" && groupName == "Cover Story"][0]{      groupName,      description,      category[]->{        _id,        tag      },      "blogs": *[        _type == "blog" &&        (          category._ref in ^.category[]._ref ||          count(category[@._ref in ^.category[]._ref]) > 0        )      ][0...6]{        _id,        _createdAt,        title,        slug,        featuredImage,        shortDescription,        category[]-> {          _id,          tag        }      }    }
+export type GET_COVER_STORYResult = {
+  groupName: string;
+  description: string | null;
+  category: Array<{
+    _id: string;
+    tag: string;
+  }> | null;
+  blogs: Array<{
+    _id: string;
+    _createdAt: string;
+    title: string;
+    slug: Slug;
+    featuredImage: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    shortDescription: string;
+    category: Array<{
+      _id: string;
+      tag: string;
+    }>;
+  }>;
+} | null;
+
 // Source: ./sanity/lib/queries.ts
 // Variable: GET_CATEGORIES
 // Query: *[_type == "category"]
@@ -270,7 +444,7 @@ export type GET_CATEGORIESResult = Array<{
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  tag?: string;
+  tag: string;
 }>;
 // Variable: GET_BLOG
 // Query: *[_type == "blog"]
@@ -280,18 +454,18 @@ export type GET_BLOGResult = Array<{
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title?: string;
-  category?: Array<{
+  title: string;
+  category: Array<{
     _ref: string;
     _type: "reference";
     _weak?: boolean;
     _key: string;
     [internalGroqTypeReferenceTo]?: "category";
   }>;
-  tag?: string;
+  tag: string;
   type?: "highlight";
-  slug?: Slug;
-  featuredImage?: {
+  slug: Slug;
+  featuredImage: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -303,26 +477,50 @@ export type GET_BLOGResult = Array<{
     crop?: SanityImageCrop;
     _type: "image";
   };
-  shortDescription?: string;
-  body?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
-  author?: {
+  shortDescription: string;
+  body: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?:
+          | "blockquote"
+          | "h1"
+          | "h2"
+          | "h3"
+          | "h4"
+          | "h5"
+          | "h6"
+          | "normal";
+        listItem?: "bullet" | "number";
+        markDefs?: Array<{
+          href?: string;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }
+    | {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: "image";
+        _key: string;
+      }
+  >;
+  author: {
     _ref: string;
     _type: "reference";
     _weak?: boolean;
@@ -332,10 +530,10 @@ export type GET_BLOGResult = Array<{
 // Variable: GET_BLOG_BY_CATEGORY
 // Query: *[  _type == "blog" &&  $tag in category[]->tag]{  title,  slug,  type,  shortDescription,  featuredImage,  _createdAt,  category[]->{    tag  }}
 export type GET_BLOG_BY_CATEGORYResult = Array<{
-  title: string | null;
-  slug: Slug | null;
+  title: string;
+  slug: Slug;
   type: "highlight" | null;
-  shortDescription: string | null;
+  shortDescription: string;
   featuredImage: {
     asset?: {
       _ref: string;
@@ -347,36 +545,60 @@ export type GET_BLOG_BY_CATEGORYResult = Array<{
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: "image";
-  } | null;
+  };
   _createdAt: string;
   category: Array<{
-    tag: string | null;
-  }> | null;
+    tag: string;
+  }>;
 }>;
 // Variable: GET_BLOG_BY_SLUG
 // Query: *[_type == "blog" && slug.current == $slug][0]{  title,  slug,  shortDescription,  body,  featuredImage,  _createdAt,  author-> {     firstName,     middleName,     lastName,     avatar   },  category[]-> { title }}
 export type GET_BLOG_BY_SLUGResult = {
-  title: string | null;
-  slug: Slug | null;
-  shortDescription: string | null;
-  body: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }> | null;
+  title: string;
+  slug: Slug;
+  shortDescription: string;
+  body: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?:
+          | "blockquote"
+          | "h1"
+          | "h2"
+          | "h3"
+          | "h4"
+          | "h5"
+          | "h6"
+          | "normal";
+        listItem?: "bullet" | "number";
+        markDefs?: Array<{
+          href?: string;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }
+    | {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: "image";
+        _key: string;
+      }
+  >;
   featuredImage: {
     asset?: {
       _ref: string;
@@ -388,12 +610,12 @@ export type GET_BLOG_BY_SLUGResult = {
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: "image";
-  } | null;
+  };
   _createdAt: string;
   author: {
-    firstName: string | null;
-    middleName: string | null;
-    lastName: string | null;
+    firstName: string;
+    middleName: string;
+    lastName: string;
     avatar: {
       asset?: {
         _ref: string;
@@ -405,18 +627,18 @@ export type GET_BLOG_BY_SLUGResult = {
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       _type: "image";
-    } | null;
-  } | null;
+    };
+  };
   category: Array<{
     title: null;
-  }> | null;
+  }>;
 } | null;
 // Variable: GET_LATEST_BLOG
 // Query: *[_type == "blog"] | order(_createdAt desc)[0...3]{    title,    slug,    shortDescription,    featuredImage,    _createdAt,    category[]->{      title    }  }
 export type GET_LATEST_BLOGResult = Array<{
-  title: string | null;
-  slug: Slug | null;
-  shortDescription: string | null;
+  title: string;
+  slug: Slug;
+  shortDescription: string;
   featuredImage: {
     asset?: {
       _ref: string;
@@ -428,17 +650,21 @@ export type GET_LATEST_BLOGResult = Array<{
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: "image";
-  } | null;
+  };
   _createdAt: string;
   category: Array<{
     title: null;
-  }> | null;
+  }>;
 }>;
 
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
+    '*[_type == "blog" && type == "highlight"]': GET_BLOG_HIGHLIGHTResult;
+    '*[\n    _type == "blog" &&\n      references(*[_type == "category" && tag == $categoryName][0]._id)\n    ]{\n      _id,\n      title,\n      featuredImage,\n      slug,\n      category,\n      shortDescription,\n      _createdAt\n    }\n  ': GET_CATEGORY_BANNERResult;
+    '*[_type == "category"]{\n      _id,\n      tag\n    }\n  ': GET_ALL_CATEGORYResult;
+    '*[_type == "section" && groupName == "Cover Story"][0]{\n      groupName,\n      description,\n\n      category[]->{\n        _id,\n        tag\n      },\n\n      "blogs": *[\n        _type == "blog" &&\n        (\n          category._ref in ^.category[]._ref ||\n          count(category[@._ref in ^.category[]._ref]) > 0\n        )\n      ][0...6]{\n        _id,\n        _createdAt,\n        title,\n        slug,\n        featuredImage,\n        shortDescription,\n        category[]-> {\n          _id,\n          tag\n        }\n      }\n    }\n  ': GET_COVER_STORYResult;
     '*[_type == "category"]': GET_CATEGORIESResult;
     '*[_type == "blog"]': GET_BLOGResult;
     '*[\n  _type == "blog" &&\n  $tag in category[]->tag\n]{\n  title,\n  slug,\n  type,\n  shortDescription,\n  featuredImage,\n  _createdAt,\n  category[]->{\n    tag\n  }\n}\n': GET_BLOG_BY_CATEGORYResult;

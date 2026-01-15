@@ -9,7 +9,7 @@ export default defineType({
       name: "tag",
       title: "Tag",
       type: "string",
-      validation: (text) => text.lowercase(),
+      validation: (text) => text.lowercase().required(),
     }),
   ],
 });
