@@ -26,14 +26,15 @@ export default async function HomepageBanner() {
   const otherFeaturedBlog = blog.slice(1);
 
   return (
-    <div className="grid gap-5 w-full xl:w-[1440px] xl:mx-auto">
-      <Image
-        src={urlFor(primaryFeaturedBlog.featuredImage).url()}
-        width={100}
-        height={100}
-        alt="Primary Featured Image"
-        className="w-full"
-      />
+    <div className="grid gap-5 w-full xl:w-360 xl:mx-auto">
+      <div className="h-222 w-full max-sm:h-60.5 relative aspect-square">
+        <Image
+          src={urlFor(primaryFeaturedBlog.featuredImage).url()}
+          alt="Primary Featured Image"
+          className="object-cover"
+          fill
+        />
+      </div>
       <div className="grid lg:grid-cols-2 xl:px-0 px-5 gap-5">
         <div className="xl:flex xl:flex-col xl:gap-3 grid gap-1">
           <AlumniSans className="text-lg uppercase xl:text-2xl">

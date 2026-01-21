@@ -122,7 +122,7 @@ export default async function Home() {
                             src={urlFor(featuredImage).url()}
                             alt={title}
                             fill
-                            objectFit="cover"
+                            className="object-cover"
                           />
                         </div>
                         <AlumniSans className="text-xs font-medium">
@@ -172,7 +172,7 @@ export default async function Home() {
                             src={urlFor(featuredImage).url()}
                             alt={title}
                             fill
-                            objectFit="cover"
+                            className="object-cover"
                           />
                         </div>
                         <AlumniSans className="text-xs font-medium">
@@ -196,7 +196,7 @@ export default async function Home() {
                     <Image
                       src={urlFor(featuredImage).url()}
                       alt={slug.current}
-                      objectFit="cover"
+                      className="object-cover"
                       fill
                     />
                   </div>

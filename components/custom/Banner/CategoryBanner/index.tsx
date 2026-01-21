@@ -37,7 +37,7 @@ export default function CategoryBanner({
                 alt={primaryBlog.title}
                 fill
                 priority
-                objectFit="cover"
+                className="object-cover"
               />
             </div>
             <div className="grid grid-cols-2 gap-22.5">
@@ -50,7 +50,7 @@ export default function CategoryBanner({
                         alt={slug.current}
                         fill
                         priority
-                        objectFit="cover"
+                        className="object-cover"
                       />
                     </div>
                     <AlumniSans className="uppercase text-2xl">
@@ -84,7 +84,7 @@ export default function CategoryBanner({
                       src={urlFor(leftSectionFirstBlog.featuredImage).url()}
                       alt={leftSectionFirstBlog.title}
                       fill
-                      objectFit="cover"
+                      className="object-cover"
                     />
                   </div>
                   <div className="flex flex-col ">
@@ -106,7 +106,7 @@ export default function CategoryBanner({
                     src={urlFor(leftSectionLastBlog.featuredImage).url()}
                     alt={leftSectionLastBlog.slug.current}
                     fill
-                    objectFit="cover"
+                    className="object-cover"
                   />
                 </div>
                 <div className="flex flex-col gap-5">
@@ -129,7 +129,7 @@ export default function CategoryBanner({
               src={urlFor(primaryBlog.featuredImage).url()}
               alt={primaryBlog.title}
               fill
-              objectFit="cover"
+              className="object-cover"
             />
           </div>
           <div className="grid gap-1.25">
@@ -155,7 +155,7 @@ export default function CategoryBanner({
                       src={urlFor(featuredImage).url()}
                       alt={title}
                       fill
-                      objectFit="cover"
+                      className="object-cover"
                     />
                   </div>
                   <div>
