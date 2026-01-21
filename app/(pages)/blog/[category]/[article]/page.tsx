@@ -105,6 +105,7 @@ export default async function Article({
                     </div>
                   ),
                 },
+
                 block: {
                   h1: ({ children }) => (
                     <Inter className="max-sm:text-3xl sm:text-4xl leading-[165%] font-bold">
@@ -127,7 +128,7 @@ export default async function Article({
                     </Inter>
                   ),
                   normal: ({ children }) => (
-                    <Inter className="max-sm:text-xs sm:text-2xl leading-[165%]">
+                    <Inter className="max-sm:text-xs sm:text-2xl leading-[165%] whitespace-pre-line">
                       {children}
                     </Inter>
                   ),
