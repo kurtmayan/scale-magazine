@@ -9,15 +9,13 @@ export default function Highlight(props: Blog) {
   const urlFor = (source: SanityImageSource) => builder.image(source);
   return (
     <div>
-      <div className="relative aspect-square">
+      <div className="relative aspect-square h-214.75 w-full max-sm:h-60.5">
         <Image
-          src={urlFor(props.featuredImage || "")
-            .width(800)
-            .url()}
-          alt="Hello"
+          src={urlFor(props.featuredImage).url()}
+          alt={props.shortDescription + "'s images"}
           fill
           priority
-          className="object-contain px-1"
+          className="object-cover px-1"
         />
       </div>
       <div className="p-5">
