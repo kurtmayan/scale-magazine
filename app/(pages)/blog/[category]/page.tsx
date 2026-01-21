@@ -21,10 +21,11 @@ export default async function Page({
 }) {
   const paginationParams = await searchParams;
   const { category } = await params;
+  const encodeCategory = decodeURIComponent(category);
 
   const blogCategories = await client.fetch<Blog[]>(GET_BLOG_BY_CATEGORY, {
     // @ts-expect-error ts-migrate-ignore
-    tag: category,
+    tag: encodeCategory,
   });
   const highlightPost = blogCategories.find(
     (post) => post.type === "highlight",
@@ -46,7 +47,7 @@ export default async function Page({
       <div className="max-sm:ps-5 max-sm:pt-5 lg:pt-16">
         <div className="h-2.5 w-20 bg-[#5C5C5C] rounded-full"></div>
         <h1 className="font-times-new-roman max-sm:text-[28px] lg:text-[64px]">
-          {capitalizeFirstLetters(decodeURIComponent(category))}
+          {capitalizeFirstLetters(decodeURIComponent(encodeCategory))}
         </h1>
       </div>
 
@@ -54,7 +55,7 @@ export default async function Page({
 
       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 px-5 justify-items-center justify-around">
         {paginatedPosts.map((e, index) => (
-          <Item key={index} slugCategory={category} {...e} />
+          <Item key={index} slugCategory={encodeCategory} {...e} />
         ))}
       </div>
 
