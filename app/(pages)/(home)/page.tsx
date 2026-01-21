@@ -172,7 +172,6 @@ export default async function Home() {
                             src={urlFor(featuredImage).url()}
                             alt={title}
                             fill
-                            className="object-cover"
                           />
                         </div>
                         <AlumniSans className="text-xs font-medium">

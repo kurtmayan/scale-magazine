@@ -2,15 +2,15 @@ import {
   Pagination,
   PaginationContent,
   PaginationItem,
-  PaginationLink,
 } from "@/components/ui/pagination";
-import { capitalizeFirstLetters } from "@/lib/utils";
+import { capitalizeFirstLetters, cn } from "@/lib/utils";
 import { GET_BLOG_BY_CATEGORY } from "@/sanity/lib/queries";
 import { client } from "@/sanity/lib/client";
 import { MoveLeft, MoveRight } from "lucide-react";
 import { Blog } from "@/sanity.types";
 import Highlight from "@/components/custom/Blog/Highlight";
 import Item from "@/components/custom/Blog/Item";
+import { default as PaginationLink } from "next/link";
 
 export default async function Page({
   params,
@@ -64,9 +64,10 @@ export default async function Page({
             <PaginationLink
               href={`?page=${Math.max(currentPage - 1, 1)}`}
               aria-disabled={currentPage === 1}
-              className={`border border-black lg:h-[77px] lg:w-[77px] ${
-                currentPage === 1 && "pointer-events-none opacity-50"
-              }`}
+              className={cn(
+                "border border-black font-bold lg:h-19.25 lg:w-19.25 lg:text-2xl flex items-center justify-center rounded-lg",
+                currentPage === 1 && "pointer-events-none opacity-50",
+              )}
             >
               <MoveLeft className="lg:h-6 lg:w-6" />
             </PaginationLink>
@@ -83,7 +84,7 @@ export default async function Page({
               >
                 <PaginationLink
                   href={`?page=${page}`}
-                  className="border border-black font-bold lg:h-[77px] lg:w-[77px] lg:text-2xl flex items-center justify-center"
+                  className="border border-black font-bold lg:h-19.25 lg:w-19.25 lg:text-2xl flex items-center justify-center rounded-lg"
                 >
                   {page}
                 </PaginationLink>
@@ -95,9 +96,10 @@ export default async function Page({
             <PaginationLink
               href={`?page=${Math.min(currentPage + 1, totalPages)}`}
               aria-disabled={currentPage === totalPages}
-              className={`border border-black lg:h-[77px] lg:w-[77px] ${
-                currentPage === totalPages && "pointer-events-none opacity-50"
-              }`}
+              className={cn(
+                "border border-black font-bold lg:h-19.25 lg:w-19.25 lg:text-2xl flex items-center justify-center rounded-lg",
+                currentPage === totalPages && "pointer-events-none opacity-50",
+              )}
             >
               <MoveRight className="lg:h-6 lg:w-6" />
             </PaginationLink>
