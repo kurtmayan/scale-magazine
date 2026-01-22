@@ -1,14 +1,15 @@
 import { Blog } from "@/sanity.types";
 import Image from "next/image";
-import imageUrlBuilder from "@sanity/image-url";
-import { client } from "@/sanity/lib/client";
-import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import Link from "next/link";
+import { urlFor } from "@/sanity/lib/image";
 
-export default function Highlight(props: Blog) {
-  const builder = imageUrlBuilder(client);
-  const urlFor = (source: SanityImageSource) => builder.image(source);
+export default function Highlight(
+  props: Blog & {
+    highlightCategory?: string;
+  },
+) {
   return (
-    <div>
+    <Link href={`${props.highlightCategory}/${props.slug.current}`}>
       <div className="relative aspect-square h-214.75 w-full max-sm:h-60.5">
         <Image
           src={urlFor(props.featuredImage).url()}
@@ -26,6 +27,6 @@ export default function Highlight(props: Blog) {
           {props.shortDescription}
         </p>
       </div>
-    </div>
+    </Link>
   );
 }
