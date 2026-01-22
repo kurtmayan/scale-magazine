@@ -24,14 +24,14 @@ export default async function Article({
   params: Promise<{ category: string; article: string }>;
 }) {
   const { category, article } = await params;
-  const encodeCategory = decodeURIComponent(category);
+  const decodeCategory = decodeURIComponent(category);
   const decodeArticle = decodeURIComponent(article);
   const blogSlug = await client.fetch(GET_BLOG_BY_SLUG, {
     slug: decodeArticle,
   });
   const blogCategories = await client.fetch<Blog[]>(GET_BLOG_BY_CATEGORY, {
     // @ts-expect-error ts-migrate-ignore
-    tag: encodeCategory,
+    tag: decodeCategory,
   });
   const normalPosts = blogCategories
     .filter((post) => post.type !== "highlight")
@@ -43,7 +43,7 @@ export default async function Article({
     <div className="lg:w-10/12 mx-auto ">
       <div className="max-sm:ps-5 max-sm:pt-5 lg:pt-16 p-5">
         <AlumniSans className="font-semibold  max-sm:text-[26px] lg:text-[64px]">
-          {encodeCategory.toUpperCase()}
+          {decodeCategory.toUpperCase()}
         </AlumniSans>
       </div>
 
@@ -147,7 +147,7 @@ export default async function Article({
 
             <div className=" justify-between flex sm:block">
               {recentBlog.map((e, index) => (
-                <Item key={index} slugCategory={encodeCategory} {...e} />
+                <Item key={index} slugCategory={decodeCategory} {...e} />
               ))}
             </div>
           </div>
@@ -156,7 +156,7 @@ export default async function Article({
 
       <div className="p-4">
         <TimesNewRoman className="max-sm:text-2xl sm:text-[64px]">
-          More from {capitalizeFirstLetters(encodeCategory)}
+          More from {capitalizeFirstLetters(decodeCategory)}
         </TimesNewRoman>
 
         <div className="gap-2 flex flex-col mt-2 ">
