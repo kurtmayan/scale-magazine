@@ -38,7 +38,7 @@ export default async function Article({
     .slice(0, 3);
 
   const recentBlog = await client.fetch<Blog[]>(GET_LATEST_BLOG);
-
+  console.log("Hello Everyone!");
   return (
     <div className="lg:w-10/12 mx-auto ">
       <div className="max-sm:ps-5 max-sm:pt-5 lg:pt-16 p-5">
