@@ -48,7 +48,9 @@ export default async function Home() {
       title,
       featuredImage,
       slug,
-      category,
+      category[]->{
+        tag
+      },
       shortDescription,
       _createdAt
     }
@@ -165,7 +167,7 @@ export default async function Home() {
                 .slice(0, 4)
                 .map(({ title, featuredImage, slug, _createdAt, category }) => (
                   <CarouselItem className="pl-1 basis-1/2" key={slug.current}>
-                    <Link href="#">
+                    <Link href={`/blog/${category[0].tag}/${slug.current}`}>
                       <div className="p-1 grid gap-1">
                         <div className="w-auto h-39.5 relative aspect-square">
                           <Image
@@ -190,22 +192,29 @@ export default async function Home() {
             {coverStory?.blogs
               .slice(0, 3)
               .map(({ slug, title, category, featuredImage }) => (
-                <div key={slug.current} className="flex flex-row gap-5">
-                  <div className="w-46.25 h-48 relative aspect-square">
-                    <Image
-                      src={urlFor(featuredImage).url()}
-                      alt={slug.current}
-                      className="object-cover"
-                      fill
-                    />
+                <Link
+                  href={`/blog/${category[0].tag}/${slug.current}`}
+                  key={slug.current}
+                >
+                  <div key={slug.current} className="flex flex-row gap-5">
+                    <div className="w-46.25 h-48 relative aspect-square">
+                      <Image
+                        src={urlFor(featuredImage).url()}
+                        alt={slug.current}
+                        className="object-cover"
+                        fill
+                      />
+                    </div>
+                    <div>
+                      <AlumniSans className="uppercase text-2xl">
+                        {category[0].tag}
+                      </AlumniSans>
+                      <TimesNewRoman className="text-2xl">
+                        {title}
+                      </TimesNewRoman>
+                    </div>
                   </div>
-                  <div>
-                    <AlumniSans className="uppercase text-2xl">
-                      {category[0].tag}
-                    </AlumniSans>
-                    <TimesNewRoman className="text-2xl">{title}</TimesNewRoman>
-                  </div>
-                </div>
+                </Link>
               ))}
           </div>
         </div>

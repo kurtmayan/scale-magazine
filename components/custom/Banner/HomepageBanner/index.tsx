@@ -3,6 +3,7 @@ import { urlFor } from "@/sanity/lib/image";
 import { BaseBlogType } from "@/types/blog";
 import Image from "next/image";
 import { AlumniSans, Inter, TimesNewRoman } from "../../Typography";
+import Link from "next/link";
 
 export type FeaturedBlogTYpe = {
   blog: BaseBlogType[];
@@ -50,21 +51,27 @@ export default async function HomepageBanner() {
 
         <div className="grid lg:grid-cols-2 lg:gap-16 py-5">
           {otherFeaturedBlog.map(({ title, slug, category, featuredImage }) => (
-            <div className="xl:flex xl:flex-col gap-1 grid" key={title}>
-              <Image
-                src={urlFor(featuredImage).url()}
-                width={100}
-                height={100}
-                alt={title}
-                className="w-full xl:w-[307px] xl:h-[187px]"
-              />
-              <AlumniSans className="uppercase text-lg">
-                {category.tag}
-              </AlumniSans>
-              <TimesNewRoman className="text-xl xl:text-3xl">
-                {title}
-              </TimesNewRoman>
-            </div>
+            <Link
+              href={`/blog/${category.tag}/${slug.current}`}
+              key={title}
+              className="hover:cursor-pointer"
+            >
+              <div className="xl:flex xl:flex-col gap-1 grid">
+                <Image
+                  src={urlFor(featuredImage).url()}
+                  width={100}
+                  height={100}
+                  alt={title}
+                  className="w-full xl:w-[307px] xl:h-[187px]"
+                />
+                <AlumniSans className="uppercase text-lg">
+                  {category.tag}
+                </AlumniSans>
+                <TimesNewRoman className="text-xl xl:text-3xl">
+                  {title}
+                </TimesNewRoman>
+              </div>
+            </Link>
           ))}
         </div>
       </div>
