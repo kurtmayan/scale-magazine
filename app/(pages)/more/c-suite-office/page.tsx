@@ -6,6 +6,7 @@ import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import { BaseBlogType } from "@/types/blog";
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function CSuiteOffice() {
   const highlights: BaseBlogType[] = await client.fetch(`*[_type=="blog"]{
@@ -47,7 +48,11 @@ export default async function CSuiteOffice() {
 
         <div className="grid grid-cols-3 justify-items-center gap-5">
           {highlights.map((items, index) => (
-            <div key={index} className="sm:w-80.75">
+            <Link
+              key={index}
+              className="sm:w-80.75"
+              href={"../blog/" + items.category.tag + "/" + items.slug.current}
+            >
               <div className="relative aspect-square -z-10 ">
                 <Image
                   src={urlFor(items?.featuredImage ?? "").url()}
@@ -58,7 +63,7 @@ export default async function CSuiteOffice() {
                 />
               </div>
               <TimesNewRoman className="text-2xl">{items.title}</TimesNewRoman>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

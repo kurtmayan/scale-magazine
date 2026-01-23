@@ -51,7 +51,7 @@ export default async function Article({
         <div className="relative aspect-video -z-10">
           <Image
             src={urlFor(blogSlug?.featuredImage ?? "").url()}
-            alt="Hello"
+            alt={blogSlug?.title + "Images"}
             fill
             priority
             className="object-contain px-1"
